@@ -1,0 +1,64 @@
+<!DOCTYPE struts PUBLIC
+"-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+"http://struts.apache.org/dtds/struts-2.0.dtd">
+
+<struts>
+	<constant name="struts.enable.DynamicMethodInvocation" value="false" />
+	<constant name="struts.devMode" value="false" />
+	<constant name="struts.custom.i18n.resources" value="ApplicationResources" />
+
+	<package name="default" extends="struts-default" namespace="/">
+		<result-types>
+			<result-type name="tiles"
+				class="org.apache.struts2.views.tiles.TilesResult" />
+		</result-types>
+		<action name="*Menu" method="{1}" class="com.project.action.MenuAction">
+			<result name="baseLayout" type="tiles">baseLayout</result>
+		</action>
+
+
+		<action name="login" class="com.project.action.LoginAction"
+			method="login">
+			<result name="success">index.jsp</result>
+			<result name="input">login.jsp</result>
+		</action>
+
+		<action name="forgot" class="com.project.action.LoginAction"
+			method="forgot">
+			<result name="success">index.jsp</result>
+			<result name="input">forgot.jsp</result>
+		</action>
+
+		<action name="logout" class="com.project.action.LoginAction"
+			method="logout">
+			<result name="success">login.jsp</result>
+		</action>
+
+		<action name="*Customer" method="{1}"
+			class="com.project.action.CustomerAction">
+			<result name="list" type="tiles">customer</result>
+			<result name="add" type="tiles">addCustomer</result>
+			<result name="details" type="tiles">detailsCustomer</result>
+			<result name="update" type="tiles">customer</result>
+		</action>
+
+		<action name="*Kind" method="{1}" class="com.project.action.KindAction">
+			<result name="list" type="tiles">kind</result>
+			<result name="add" type="tiles">addKind</result>
+			<result name="details" type="tiles">detailsKind</result>
+			<result name="update" type="tiles">kind</result>
+		</action>
+
+		<action name="*Bus" method="{1}" class="com.project.action.BusAction">
+			<result name="list" type="tiles">bus</result>
+			<result name="add" type="tiles">addBus</result>
+			<result name="details" type="tiles">detailsBus</result>
+			<result name="update" type="tiles">kind</result>
+		</action>
+
+		<action name="*Payment" method="{1}"
+			class="com.project.action.PaymentAction">
+			<result name="list" type="tiles">payment</result>
+		</action>
+	</package>
+</struts>

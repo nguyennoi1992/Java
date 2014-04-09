@@ -1,0 +1,56 @@
+* {
+	margin: 0;
+	padding: 0
+}
+
+#mainWap {
+	width: 100%;
+	margin: 0 auto
+}
+
+#header {
+	margin-bottom: 0 auto;
+	font-size: 100%;
+	padding: 0 auto;
+	background: #99CC66;
+	min-height: 80px;
+}
+
+#right {
+	float: left;
+	width: 85%;
+	padding: 0 auto;
+	background: #F3F1EB;
+	min-height: 1500px;
+	max-height: none
+}
+
+#left {
+	float: left;
+	width: 15%;
+	background-color: #eee;
+	padding: 0 auto;
+	padding-right: 0px;
+	min-height: 1500px;
+	max-height: none
+}
+
+.clr {
+	clear: both
+}
+
+#footer {
+	background: #339933;
+	margin-top: 0 auto;
+	padding: 0 auto
+}
+
+/* CSS Document */
+table.style {
+	border: thin;
+	border-color: #333399;
+}
+
+ol {
+	margin-left: 30px;
+}
