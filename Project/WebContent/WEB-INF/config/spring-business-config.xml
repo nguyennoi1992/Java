@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:p="http://www.springframework.org/schema/p" xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans 
+						http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
+       					http://www.springframework.org/schema/aop 
+       					http://www.springframework.org/schema/aop/spring-aop-2.5.xsd
+       					http://www.springframework.org/schema/tx 
+       					http://www.springframework.org/schema/tx/spring-tx-2.5.xsd">
+
+	<!-- DECLARE BUSSINESS OBJECT -->
+
+	<bean id="userBO" class="com.project.bo.impl.UserBOImpl">
+		<property name="userDAO">
+			<ref bean="userDAO"></ref>
+		</property>
+	</bean>
+
+	<bean id="customerBO" class="com.project.bo.impl.CustomerBOImpl">
+		<property name="customerDAO">
+			<ref bean="customerDAO"></ref>
+		</property>
+		<property name="sessionFactory">
+			<ref bean="sessionFactory"></ref>
+		</property>
+	</bean>
+	<bean id="kindBO" class="com.project.bo.impl.KindBOImpl">
+		<property name="kindDAO">
+			<ref bean="kindDAO"></ref>
+		</property>
+		<property name="sessionFactory">
+			<ref bean="sessionFactory"></ref>
+		</property>
+	</bean>
+	<bean id="busBO" class="com.project.bo.impl.BusBOImpl">
+		<property name="busDAO">
+			<ref bean="busDAO"></ref>
+		</property>
+		<property name="sessionFactory">
+			<ref bean="sessionFactory"></ref>
+		</property>
+	</bean>
+	<bean id="paymentBO" class="com.project.bo.impl.PaymentBOImpl">
+		<property name="paymentDAO">
+			<ref bean="paymentDAO"></ref>
+		</property>
+		<property name="sessionFactory">
+			<ref bean="sessionFactory"></ref>
+		</property>
+	</bean>
+</beans>

@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="com.project.bean.CustomerBean" table="Customers"
+		catalog="managementbus">
+		<id name="customerNumber" type="string">
+			<column name="CustomerNumber" />
+			<generator class="identity" />
+		</id>
+		<property name="firstName" type="string">
+			<column name="FirstName" length="45" not-null="true" />
+		</property>
+		<property name="lastName" type="string">
+			<column name="LastName" length="45" not-null="true" />
+		</property>
+		<property name="dateOfBirth" type="date">
+			<column name="DateOfBirth" not-null="true" />
+		</property>
+		<property name="dateLimit" type="date">
+			<column name="DateLimit" />
+		</property>
+		<property name="phoneNumber" type="string">
+			<column name="PhoneNumber" length="45" />
+		</property>
+		<property name="address" type="string">
+			<column name="Address" length="256" not-null="true" />
+		</property>
+		<property name="schoolOrCompany" type="string">
+			<column name="SchoolOrCompany" length="45" />
+		</property>
+		<property name="job" type="string">
+			<column name="Job" length="45" not-null="true" />
+		</property>
+		<property name="balance" type="java.lang.Float">
+			<column name="Balance" not-null="true" />
+		</property>
+		<property name="placeEnroll" type="string">
+			<column name="PlaceEnroll" length="256" not-null="true" />
+		</property>
+		<property name="kindNumber" type="java.lang.Integer">
+			<column name="KindNumber" not-null="true" />
+		</property>
+		<property name="busNumber" type="string">
+			<column name="BusNumber" length="45" not-null="true" />
+		</property>
+		<property name="actived" type="string">
+			<column name="Actived" length="5" not-null="true" />
+		</property>
+	</class>
+</hibernate-mapping>

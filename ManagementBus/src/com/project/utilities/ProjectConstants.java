@@ -10,10 +10,17 @@ public abstract interface ProjectConstants {
 	public final String MSG_INVALID_EMAIL = "invalid_email";
 
 	public final String DB_JDBC_DRIVER = "com.mysql.jdbc.Driver";
-	public final String DB_JDBC_USERNAME = "daica";
-	public final String DB_JDBC_PASSWORD = "daica@123";
-	public final String DB_JDBC_NAME = "jdbc:mysql://s156.eatj.com:3307/daica";
 
+	//db4free.net
+	public final String DB_JDBC_USERNAME = "nguyennoi1992";
+	public final String DB_JDBC_PASSWORD = "abc123";
+	public final String DB_JDBC_NAME = "jdbc:mysql://www.db4free.net:3306/managementbus";
+
+	//s156.eatj.com
+/*	public final String DB_JDBC_USERNAME = "daica";
+	public final String DB_JDBC_PASSWORD = "daica@123";
+	public final String DB_JDBC_NAME = "jdbc:mysql://s156.eatj.com:3306/daica";
+*/
 	public final String ENCODE_ALGORITHM = "MD5";
 	public final String ENCODE_CHARSET = "UTF-8";
 
@@ -24,7 +31,7 @@ public abstract interface ProjectConstants {
 	/*
 	 * Bang Users
 	 */
-	public final String DB_TABLE_USER = "users";
+	public final String DB_TABLE_USER = "Users";
 	public final String DB_FIELD_USERNAME = "username";
 	public final String DB_FIELD_PASSWORD = "password";
 	

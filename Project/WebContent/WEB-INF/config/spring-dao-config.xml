@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:p="http://www.springframework.org/schema/p" xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans 
+						http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
+       					http://www.springframework.org/schema/aop 
+       					http://www.springframework.org/schema/aop/spring-aop-2.5.xsd
+       					http://www.springframework.org/schema/tx 
+       					http://www.springframework.org/schema/tx/spring-tx-2.5.xsd">
+	<!--DECLARE DATA ACCESS OBJECT -->
+	<bean id="userDAO" class="com.project.dao.impl.UserDAOImpl">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory"></ref>
+		</property>
+	</bean>
+	<bean id="customerDAO" class="com.project.dao.impl.CustomerDAOImpl">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory"></ref>
+		</property>
+	</bean>
+	<bean id="kindDAO" class="com.project.dao.impl.KindDAOImpl">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory"></ref>
+		</property>
+	</bean>
+	<bean id="busDAO" class="com.project.dao.impl.BusDAOImpl">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory"></ref>
+		</property>
+	</bean>
+	<bean id="paymentDAO" class="com.project.dao.impl.PaymentDAOImpl">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory"></ref>
+		</property>
+	</bean>
+</beans>

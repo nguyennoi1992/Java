@@ -10,14 +10,14 @@ public interface DBTableName {
 	/*
 	 * Bang Users
 	 */
-	public static String STATIC_USERS_TBNAME = "users";
+	public static String STATIC_USERS_TBNAME = "Users";
 	public static String STATIC_USERS_USERNAME = "username";
 	public static String STATIC_USERS_PASSWORD = "password";
 	
 	/*
 	 * Bang Customer
 	 */
-	public static String STATIC_CUSTOMERS_TBNAME = "customers";
+	public static String STATIC_CUSTOMERS_TBNAME = "Customers";
 	public static String STATIC_CUSTOMERS_CUSTOMERNUMBER = "customerNumber";
 	public static String STATIC_CUSTOMERS_FIRSTNAME = "firstName";
 	public static String STATIC_CUSTOMERS_LASTNAME = "lastname";
@@ -36,7 +36,7 @@ public interface DBTableName {
 	/*
 	 * Bang Kind
 	 */
-	public static String STATIC_KIND_TBNAME = "kind";
+	public static String STATIC_KIND_TBNAME = "Kind";
 	public static String STATIC_KIND_KINDNUMBER = "kindNumber";
 	public static String STATIC_KIND_KIND = "kind";
 	public static String STATIC_KIND_TYPE = "type";
@@ -45,7 +45,7 @@ public interface DBTableName {
 	/*
 	 * Bang Bus
 	 */
-	public static String STATIC_BUS_TBNAME = "bus";
+	public static String STATIC_BUS_TBNAME = "Bus";
 	public static String STATIC_BUS_BUSNUMBER = "busNumber";
 	public static String STATIC_BUS_DETAILS = "details";
 	public static String STATIC_BUS_COST = "cost";
@@ -53,7 +53,7 @@ public interface DBTableName {
 	/*
 	 * Bang Payment
 	 */
-	public static String STATIC_PAYMENT_TBNAME = "payment";
+	public static String STATIC_PAYMENT_TBNAME = "Payment";
 	public static String STATIC_PAYMENT_PAYMENTNUMBER = "paymentNumber";
 	public static String STATIC_PAYMENT_DATE = "date";
 	public static String STATIC_PAYMENT_PLACE = "place";
