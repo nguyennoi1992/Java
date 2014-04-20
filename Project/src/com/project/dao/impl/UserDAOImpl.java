@@ -19,14 +19,14 @@ public class UserDAOImpl extends HibernateDaoSupport implements UserDAO<UserBean
 			List<UserBean> l = null;
 
 			// Using HQL
-			String queryString = "from Users where username='" + entity.getUsername() + "'"
+/*			String queryString = "from Users where username='" + entity.getUsername() + "'"
                     + "and password='" + entity.getPassword() + "'";
-            l = getHibernateTemplate().find(queryString);
+            l = getHibernateTemplate().find(queryString);*/
 
 			// Using SQL
-/*			String sqlQuerryString =  "select * from Users where username='" + entity.getUsername() + "'"
+			String sqlQuerryString =  "select * from Users where username='" + entity.getUsername() + "'"
 					+ "and password='" + entity.getPassword() + "'";
-			l = getSession().createSQLQuery(sqlQuerryString).list();*/
+			l = getSession().createSQLQuery(sqlQuerryString).list();
 
 			if (l != null) {
 				if (l.size() > 0) {

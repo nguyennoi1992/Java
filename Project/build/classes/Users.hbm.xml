@@ -2,20 +2,13 @@
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
 <hibernate-mapping>
-	<class name="com.project.bean.UserBean" table="Users"
-	catalog="managementbus">
-		<id name="userNumber" type="java.lang.Integer">
-			<column name="userNumber" />
-			<generator class="identity" />
+	<class name="com.project.bean.UserBean" table="Users">
+		<id name="userNumber" column="Usernumber" type="integer">
+			<generator class="native" />
 		</id>
-		<property name="username" type="string">
-			<column name="username" length="45" not-null="true" />
-		</property>
-		<property name="password" type="string">
-			<column name="password" length="45" not-null="true" />
-		</property>
-		<property name="email" type="string">
-			<column name="email" length="45" not-null="true" />
-		</property>
+		<property name="username" column="Username" type="string" />
+		<property name="password" column="Password" type="string" />
+		<property name="email" column="Email" type="string" />
+		<property name="busNumber" column="busNumber" type="string" />
 	</class>
 </hibernate-mapping>

@@ -2,17 +2,15 @@
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
 <hibernate-mapping>
-	<class name="com.project.bean.BusBean" table="Bus" 
-	catalog="managementbus">
-		<id name="busNumber" type="string">
-			<column name="busNumber" />
+	<class name="com.project.bean.BusBean" table="Bus">
+		<id name="busNumber" column="BusNumber" type="string">
 			<generator class="identity" />
 		</id>
-		<property name="details" type="string">
-			<column name="details" length="256" />
-		</property>
-		<property name="cost" type="java.lang.Float">
-			<column name="cost" />
-		</property>
+		<set name="busNumber" cascade="all">
+			<key column="BusNumber" />
+			<one-to-many class="com.project.bean.BusBean" />
+		</set>
+		<property name="details" column="Details" type="string" />
+		<property name="cost" column="Cost" type="float" />
 	</class>
 </hibernate-mapping>
