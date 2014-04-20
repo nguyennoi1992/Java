@@ -14,6 +14,7 @@ public class CustomerBean implements Serializable {
 	private String  firstName;
 	private String lastName;
 	private Date dateOfBirth;
+	private String image;
 	private Date dateLimit;
 	private String phoneNumber;
 	private String address;
@@ -31,7 +32,7 @@ public class CustomerBean implements Serializable {
 	}
 
 	public CustomerBean(String customerNumber, String firstName,
-			String lastName, Date dateOfBirth, Date dateLimit,
+			String lastName, Date dateOfBirth, String image, Date dateLimit,
 			String phoneNumber, String address, String schoolOrCompany,
 			String job, float balance, String placeEnroll, int kindNumber,
 			String busNumber, String actived) {
@@ -40,6 +41,7 @@ public class CustomerBean implements Serializable {
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.dateOfBirth = dateOfBirth;
+		this.image = image;
 		this.dateLimit = dateLimit;
 		this.phoneNumber = phoneNumber;
 		this.address = address;
@@ -82,6 +84,14 @@ public class CustomerBean implements Serializable {
 
 	public void setDateOfBirth(Date dateOfBirth) {
 		this.dateOfBirth = dateOfBirth;
+	}
+
+	public String getImage() {
+		return image;
+	}
+
+	public void setImage(String image) {
+		this.image = image;
 	}
 
 	public Date getDateLimit() {

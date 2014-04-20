@@ -2,23 +2,16 @@
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
 <hibernate-mapping>
-	<class name="com.project.bean.PaymentBean" table="Payment"
-		catalog="managementbus">
-		<id name="paymentNumber" type="java.lang.Integer">
-			<column name="paymentNumber" />
-			<generator class="identity" />
+	<class name="com.project.bean.PaymentBean" table="Payment">
+		<id name="paymentNumber" column="PaymentNumber" type="integer">
+			<generator class="native" />
 		</id>
-		<property name="date" type="java.util.Date">
-			<column name="date" not-null="true" />
-		</property>
-		<property name="place" type="string">
-			<column name="place" length="100" not-null="true" />
-		</property>
-		<property name="customerNumber" type="string">
-			<column name="customerNumber" length="45" not-null="true" />
-		</property>
-		<property name="busNumber" type="string">
-			<column name="busNumber" length="45" not-null="true" />
-		</property>
+		<property name="date" column="Date" type="date" />
+		<property name="place" column="Place" type="string" />
+		<many-to-one name="customerNumber" column="CustomerNumber"
+			unique="true" class="com.project.bean.CustomerBean" not-null="true" />
+		<many-to-one name="busNumber" column="BusNumber" unique="true"
+			class="com.project.bean.BusBean" not-null="true" />
+
 	</class>
 </hibernate-mapping>

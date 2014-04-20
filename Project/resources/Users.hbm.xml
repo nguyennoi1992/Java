@@ -6,9 +6,11 @@
 		<id name="userNumber" column="Usernumber" type="integer">
 			<generator class="native" />
 		</id>
+
 		<property name="username" column="Username" type="string" />
 		<property name="password" column="Password" type="string" />
 		<property name="email" column="Email" type="string" />
-		<property name="busNumber" column="busNumber" type="string" />
+		<many-to-one name="busNumber" column="BusNumber" unique="true"
+			class="com.project.bean.BusBean" not-null="true" />
 	</class>
 </hibernate-mapping>

@@ -2,19 +2,12 @@
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
 <hibernate-mapping>
-	<class name="com.project.bean.KindBean" table="Kind" catalog="managementbus">
-		<id name="kindNumber" type="java.lang.Integer">
-			<column name="kindNumber" />
-			<generator class="identity" />
+	<class name="com.project.bean.KindBean" table="Kind">
+		<id name="kindNumber" column="KindNumber" type="integer">
+			<generator class="native" />
 		</id>
-		<property name="kind" type="string">
-			<column name="kind" length="45" not-null="true" />
-		</property>
-		<property name="type" type="string">
-			<column name="type" length="45" not-null="true" />
-		</property>
-		<property name="category" type="string">
-			<column name="category" length="45" not-null="true" />
-		</property>
+		<property name="kind" column="Kind" type="string" />
+		<property name="type" column="Type" type="string" />
+		<property name="category" column="Category" type="string" />
 	</class>
 </hibernate-mapping>
