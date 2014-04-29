@@ -16,7 +16,7 @@ public abstract interface ProjectConstants {
 	public final String DB_JDBC_PASSWORD = "abc123";
 	public final String DB_JDBC_NAME = "jdbc:mysql://www.db4free.net:3306/managementbus";
 */
-	//s156.eatj.com
+	//localhost
 	public final String DB_JDBC_USERNAME = "root";
 	public final String DB_JDBC_PASSWORD = "abc123";
 	public final String DB_JDBC_NAME = "jdbc:mysql://localhost:3306/managementbus";

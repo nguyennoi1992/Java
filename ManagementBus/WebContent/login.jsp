@@ -3,7 +3,7 @@
 <%@taglib uri="/struts-tags" prefix="s"%>
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-<title>Chào mừng đến với hệ thống quản lý!</title>
+<title>Welcome to Service Directory</title>
 <link rel="stylesheet" type="text/css" href="css/stylesheet.css" />
 </head>
 
@@ -17,34 +17,38 @@
 		<div id="login-content">
 			<s:form action="login">
 				<p>
-					<s:textfield cssClass="text-input" name="username" label="Tên đăng nhập" />
+					<s:textfield cssClass="text-input" name="username" key="label.username" />
 				</p>
 				<br />
 				<p>
-					<s:password cssClass="text-input" name="password" label="Mật khẩu" />
+					<s:password cssClass="text-input" name="password" key="label.password" />
 				</p>
 				<br />
 				<p>
-					<s:submit cssClass="button" value="Đăng nhập" />
+					<s:submit cssClass="button" key="label.login" />
 				</p>
 			</s:form>
 			<div style="float: right; padding-right: 9px">
 				<a href="forgot.jsp" class="label">Quên mật khẩu?</a>
 			</div>
 			<s:if test="#request.message=='invalid_username'">
-				<div class="error">Tên đăng nhập sai</div>
+				<div class="error">Tên đăng nhập không đúng</div>
 			</s:if>
 			<s:if test="#request.message=='empty_username'">
-				<div class="error">Thiếu tên đăng nhập</div>
+				<div class="error">Username is required</div>
 			</s:if>
 			<s:if test="#request.message=='empty_password'">
-				<div class="error">Thiếu mật khẩu</div>
+				<div class="error">Password is required</div>
 			</s:if>
 			<s:if test="#request.message=='user_notexist'">
 				<div class="error">Tên đăng nhập hoặc mật khẩu không đúng</div>
 			</s:if>
 		</div>
 	</div>
+	
+	<div id="dummy"></div>
+	<div id="dummy2"></div>
+
 
 </body>
 </html>
