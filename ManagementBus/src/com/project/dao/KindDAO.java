@@ -7,10 +7,10 @@ import java.util.List;
 import com.mysql.jdbc.Connection;
 import com.mysql.jdbc.PreparedStatement;
 import com.project.bean.Kind;
-import com.project.db.DBHelper;
-import com.project.db.DBTableName;
+import com.project.db.DBUtils;
+import com.project.utilities.ProjectConstants;
 
-public class KindDAO implements DBTableName{
+public class KindDAO implements ProjectConstants{
 	// doi tuong connect dung cho ham .
 	Connection conn = null;
 	/*
@@ -20,7 +20,7 @@ public class KindDAO implements DBTableName{
 	public KindDAO() {
 		// TODO Auto-generated constructor stub
 		try {
-			conn = (Connection) DBHelper.getConnection();
+			conn = (Connection) DBUtils.getConnection();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -32,7 +32,7 @@ public class KindDAO implements DBTableName{
 		
 		if (conn == null) {
 			try {
-				conn = (Connection) DBHelper.getConnection();
+				conn = (Connection) DBUtils.getConnection();
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
@@ -84,7 +84,7 @@ public class KindDAO implements DBTableName{
 		// Bat ngoai le chua khoi tao .
 		if (conn == null) {
 			try {
-				conn = (Connection) DBHelper.getConnection();
+				conn = (Connection) DBUtils.getConnection();
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
@@ -128,7 +128,7 @@ System.out.println(query);
 		int result = 0;
 		if (conn == null) {
 			try {
-				conn = (Connection) DBHelper.getConnection();
+				conn = (Connection) DBUtils.getConnection();
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
@@ -161,7 +161,7 @@ System.out.println(query);
 	public Kind search(int ID){
 		if (conn == null) {
 			try {
-				conn = (Connection) DBHelper.getConnection();
+				conn = (Connection) DBUtils.getConnection();
 			} catch (Exception e) {
 				e.printStackTrace();
 			}

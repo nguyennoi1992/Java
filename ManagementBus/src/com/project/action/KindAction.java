@@ -6,8 +6,9 @@ import java.util.List;
 import com.opensymphony.xwork2.ActionSupport;
 import com.project.bean.Kind;
 import com.project.controller.KindController;
+import com.project.utilities.ProjectConstants;
 
-public class KindAction extends ActionSupport {
+public class KindAction extends ActionSupport implements ProjectConstants {
 	/**
 	 * 
 	 */
@@ -23,17 +24,18 @@ public class KindAction extends ActionSupport {
 	int kindID;
 	int pageUp = 0, pageDown = 0;
 	int pageIndex = 1;
-	int totalPage = connK.getAll().size() / 10 + 1;
+	int totalPage = connK.getAll().size() / STATIC_ROW_MAX + 1;
 
 	public String list(){
 		list = connK.getAll();
-		int index = 0;
+		int index = 0, begin = 0;
+		begin = (pageIndex - 1) * STATIC_ROW_MAX;
 		if(pageIndex < totalPage) {
-			index = pageIndex * 10;
+			index = pageIndex * STATIC_ROW_MAX;
 		} else {
 			index = list.size();
 		}
-		for(int i = (pageIndex - 1) * 10; i < index; i++) {
+		for(int i = begin; i < index; i++) {
 			listKind.add(list.get(i));				
 		}
 		return "list";

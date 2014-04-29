@@ -2,4 +2,7 @@ eclipse.preferences.version=1
 encoding//WebContent/addCustomer.jsp=UTF-8
 encoding//WebContent/banner.jsp=UTF-8
 encoding//WebContent/bus.jsp=UTF-8
+encoding//WebContent/busDetails.jsp=UTF-8
+encoding//WebContent/customerDetails.jsp=UTF-8
+encoding//WebContent/kindDetails.jsp=UTF-8
 encoding//WebContent/menu.jsp=UTF-8

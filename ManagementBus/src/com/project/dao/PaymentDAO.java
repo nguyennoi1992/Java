@@ -7,10 +7,10 @@ import java.util.List;
 import com.mysql.jdbc.Connection;
 import com.mysql.jdbc.PreparedStatement;
 import com.project.bean.Payment;
-import com.project.db.DBHelper;
-import com.project.db.DBTableName;
+import com.project.db.DBUtils;
+import com.project.utilities.ProjectConstants;
 
-public class PaymentDAO implements DBTableName{
+public class PaymentDAO implements ProjectConstants{
 	// doi tuong connect dung cho ham .
 	Connection conn = null;
 	/*
@@ -20,7 +20,7 @@ public class PaymentDAO implements DBTableName{
 	public PaymentDAO() {
 		// TODO Auto-generated constructor stub
 		try {
-			conn = (Connection) DBHelper.getConnection();
+			conn = (Connection) DBUtils.getConnection();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -32,7 +32,7 @@ public class PaymentDAO implements DBTableName{
 
 		if (conn == null) {
 			try {
-				conn = (Connection) DBHelper.getConnection();
+				conn = (Connection) DBUtils.getConnection();
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
@@ -85,7 +85,7 @@ public class PaymentDAO implements DBTableName{
 		// Bat ngoai le chua khoi tao .
 		if (conn == null) {
 			try {
-				conn = (Connection) DBHelper.getConnection();
+				conn = (Connection) DBUtils.getConnection();
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
@@ -129,7 +129,7 @@ public class PaymentDAO implements DBTableName{
 		int result = 0;
 		if (conn == null) {
 			try {
-				conn = (Connection) DBHelper.getConnection();
+				conn = (Connection) DBUtils.getConnection();
 			} catch (Exception e) {
 				e.printStackTrace();
 			}

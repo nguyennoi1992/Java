@@ -6,7 +6,7 @@ import java.sql.SQLException;
 
 import com.project.utilities.ProjectConstants;
 
-public class DBHelper implements ProjectConstants {
+public class DBUtils implements ProjectConstants {
 	
 	/*
 	 * Thuc hien tao ra 1 connect toi co so du lieu .

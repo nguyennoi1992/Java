@@ -16,9 +16,10 @@ import com.project.bean.Kind;
 import com.project.controller.BusController;
 import com.project.controller.CustomerController;
 import com.project.controller.KindController;
+import com.project.utilities.ProjectConstants;
 
 public class CustomerAction extends ActionSupport implements
-ServletRequestAware {
+ServletRequestAware, ProjectConstants {
 	/**
 	 * 
 	 */
@@ -45,7 +46,7 @@ ServletRequestAware {
 
 	int pageUp = 0, pageDown = 0;
 	int pageIndex = 1;
-	int totalPage = connC.getAll().size() / 10 + 1;
+	int totalPage = connC.getAll().size() / STATIC_ROW_MAX + 1;
 
 	/**
 	 * Ham nay thuc hien get list 
@@ -53,13 +54,14 @@ ServletRequestAware {
 	 */
 	public String list(){
 		list = connC.getAll();
-		int index = 0;
+		int index = 0, begin = 0;
+		begin = (pageIndex - 1) * STATIC_ROW_MAX;
 		if(pageIndex < totalPage) {
-			index = pageIndex * 10;
+			index = pageIndex * STATIC_ROW_MAX;
 		} else {
 			index = list.size();
 		}
-		for(int i = (pageIndex - 1) * 10; i < index; i++) {
+		for(int i = begin; i < index; i++) {
 			listCustomer.add(list.get(i));				
 		}
 		return "list";

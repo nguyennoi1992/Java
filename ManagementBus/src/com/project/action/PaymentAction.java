@@ -6,8 +6,9 @@ import java.util.List;
 import com.opensymphony.xwork2.ActionSupport;
 import com.project.bean.Payment;
 import com.project.controller.PaymentController;
+import com.project.utilities.ProjectConstants;
 
-public class PaymentAction extends ActionSupport{
+public class PaymentAction extends ActionSupport implements ProjectConstants {
 	/**
 	 * 
 	 */
@@ -20,7 +21,7 @@ public class PaymentAction extends ActionSupport{
 
 	int pageUp = 0, pageDown = 0;
 	int pageIndex = 1;
-	int totalPage = connP.getAll().size() / 10 + 1;
+	int totalPage = connP.getAll().size() / STATIC_ROW_MAX + 1;
 
 	/**
 	 * Ham nay thuc hien get list 
@@ -28,13 +29,14 @@ public class PaymentAction extends ActionSupport{
 	 */
 	public String list(){
 		list = connP.getAll();
-		int index = 0;
+		int index = 0, begin = 0;
+		begin = (pageIndex - 1) * STATIC_ROW_MAX;
 		if(pageIndex < totalPage) {
-			index = pageIndex * 10;
+			index = pageIndex * STATIC_ROW_MAX;
 		} else {
 			index = list.size();
 		}
-		for(int i = (pageIndex - 1) * 10; i < index; i++) {
+		for(int i = begin; i < index; i++) {
 			listPayment.add(list.get(i));				
 		}
 		return "list";

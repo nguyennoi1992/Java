@@ -6,8 +6,9 @@ import java.util.List;
 import com.opensymphony.xwork2.ActionSupport;
 import com.project.bean.Bus;
 import com.project.controller.BusController;
+import com.project.utilities.ProjectConstants;
 
-public class BusAction extends ActionSupport{
+public class BusAction extends ActionSupport implements ProjectConstants{
 	/**
 	 * 
 	 */
@@ -24,7 +25,7 @@ public class BusAction extends ActionSupport{
 	String busID;
 	int pageUp = 0, pageDown = 0;
 	int pageIndex = 1;
-	int totalPage = connB.getAll().size() / 10 + 1;
+	int totalPage = connB.getAll().size() / STATIC_ROW_MAX + 1;
 
 
 
@@ -35,9 +36,9 @@ public class BusAction extends ActionSupport{
 	public String list(){
 		list = connB.getAll();
 		int index = 0, begin = 0;
-		begin = (pageIndex - 1) * 10;
+		begin = (pageIndex - 1) * STATIC_ROW_MAX;
 		if(pageIndex < totalPage) {
-			index = pageIndex * 10;
+			index = pageIndex * STATIC_ROW_MAX;
 		} else {
 			index = list.size();
 		}

@@ -5,12 +5,11 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 
 import com.project.bean.User;
-import com.project.db.DBHelper;
-import com.project.db.DBTableName;
+import com.project.db.DBUtils;
 import com.project.utilities.ProjectConstants;
 
 
-public class UserDAO implements ProjectConstants, DBTableName {
+public class UserDAO implements ProjectConstants {
 
 	/**
 	 * look up <code>UserBean</code> in database
@@ -27,7 +26,7 @@ public class UserDAO implements ProjectConstants, DBTableName {
 		boolean ans = false;
 
 		try {
-			connection = DBHelper.getConnection();
+			connection = DBUtils.getConnection();
 			if(connection != null){
 				//set parameter for SQL query
 				PreparedStatement stmt = connection.prepareStatement(sql);
@@ -37,7 +36,7 @@ public class UserDAO implements ProjectConstants, DBTableName {
 				//run SQL query
 				ResultSet rs = stmt.executeQuery();
 				ans = rs.next();
-				DBHelper.close(connection);
+				DBUtils.close(connection);
 			}
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
