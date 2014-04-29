@@ -9,14 +9,14 @@ import org.apache.struts2.ServletActionContext;
 import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 import com.opensymphony.xwork2.ModelDriven;
-import com.project.bean.UserBean;
+import com.project.bean.User;
 import com.project.controller.LoginController;
 import com.project.utilities.ProjectConstants;
 
 public class LoginAction extends ActionSupport implements ModelDriven<Object>, ProjectConstants{
 	
 	private static final long serialVersionUID = 1L;
-	private UserBean user = new UserBean();
+	private User user = new User();
 	
 	/*
 	 * Model Driven method
@@ -25,11 +25,11 @@ public class LoginAction extends ActionSupport implements ModelDriven<Object>, P
 		return user;
 	}
 
-	public UserBean getUser() {
+	public User getUser() {
 		return user;
 	}
 
-	public void setUser(UserBean user) {
+	public void setUser(User user) {
 		this.user = user;
 	}
 	

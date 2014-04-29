@@ -20,21 +20,39 @@
 
 		<table width="100%">
 			<tr align="center">
-				<th>Tuyến xe bus</th>
-				<th>Chi tiết</th>
-				<th>Giá vé</th>
+				<th width="10%">Tuyến xe bus</th>
+				<th width="70%">Chi tiết</th>
+				<th width="20%">Giá vé</th>
 			</tr>
 			<s:iterator value="listBus" var="bus">
 				<tr align="center">
-					<td><s:submit name="busID" value="%{#bus.busNumber}"
+					<%-- 					<td><s:submit name="busID" value="%{#bus.busNumber}"
 							id="%{#bus.busNumber}" theme="simple" cssClass="hidden" /> <label
 						for="<s:property value="#bus.busNumber"/>"><s:property
-								value="#bus.busNumber" /> </label></td>
-					<td><s:property value="#bus.details" /></td>
+								value="#bus.busNumber" /> </label></td> --%>
+					<td><a
+						href="detailsBus.action?busID=<s:property
+								value="#bus.busNumber" />"><s:property
+								value="#bus.busNumber" /> </a></td>
+					<td align="left">      <s:property
+							value="#bus.details" /></td>
 					<td><s:property value="#bus.cost" /> đ</td>
 				</tr>
 			</s:iterator>
 		</table>
 	</s:form>
+	<table width="29%" align="right" border="0">
+		<tr>
+			<th align="center" style="color: black;"><a
+				href="pageBus.action?pageDown=<s:property value="pageIndex"/>">
+					&lt;&lt; </a></th>
+			<td><s:property value="pageIndex" /> / <s:property
+					value="totalPage" /></td>
+			<th align="center" style="color: black;"><a
+				href="pageBus.action?pageUp=<s:property value="pageIndex"/>">
+					&gt;&gt; </a></th>
+
+		</tr>
+	</table>
 </body>
 </html>

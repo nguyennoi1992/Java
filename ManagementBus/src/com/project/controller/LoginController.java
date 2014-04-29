@@ -1,7 +1,7 @@
 package com.project.controller;
 
 
-import com.project.bean.UserBean;
+import com.project.bean.User;
 import com.project.dao.UserDAO;
 import com.project.utilities.CheckEmail;
 import com.project.utilities.ProjectConstants;
@@ -14,7 +14,7 @@ public class LoginController implements ProjectConstants {
 	 * @see UserBean
 	 * @return message code of result
 	 */
-	public static String validate(UserBean user) {
+	public static String validate(User user) {
 		String username = user.getUsername();
 		String password = user.getPassword();
 		//empty field
@@ -35,7 +35,7 @@ public class LoginController implements ProjectConstants {
 	 * @param user UserBean contain username and password
 	 * @return
 	 */
-	public static boolean checkExistUser(UserBean user) {
+	public static boolean checkExistUser(User user) {
 		return UserDAO.checkExistUser(user);
 	}
 
@@ -44,7 +44,7 @@ public class LoginController implements ProjectConstants {
 	 * @param user UserBean contain email of user
 	 * @return message code of result
 	 */
-	public static String validateEmail(UserBean user) {
+	public static String validateEmail(User user) {
 		String email = user.getEmail();
 		return CheckEmail.validateEmail(email);
 	}

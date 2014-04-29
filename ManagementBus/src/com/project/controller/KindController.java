@@ -3,7 +3,7 @@ package com.project.controller;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.project.bean.KindBean;
+import com.project.bean.Kind;
 import com.project.dao.KindDAO;
 
 public class KindController {
@@ -15,9 +15,9 @@ public class KindController {
 		// TODO Auto-generated constructor stub
 	}
 
-	public List<KindBean> view(){
-		List<KindBean> list = new ArrayList<KindBean>();
-		List<KindBean> listAll = dao.getAll();
+	public List<Kind> getAll(){
+		List<Kind> list = new ArrayList<Kind>();
+		List<Kind> listAll = dao.getAll();
 		for(int i = 0; i < listAll.size(); i++){
 			list.add(listAll.get(i));
 		}
@@ -25,7 +25,7 @@ public class KindController {
 		return list;
 	}
 	
-	public int Insert(KindBean bean){
+	public int Insert(Kind bean){
 		int result = 0;
 		
 		result = dao.Insert(bean);
@@ -33,8 +33,8 @@ public class KindController {
 		return result;
 	} 
 	
-	public KindBean search(int ID) {
-		KindBean bean = new KindBean();
+	public Kind search(int ID) {
+		Kind bean = new Kind();
 		
 		bean  = dao.search(ID);
 		
@@ -42,7 +42,7 @@ public class KindController {
 	}
 	
 	
-	public int Update(KindBean bean){
+	public int Update(Kind bean){
 		int result = 0;
 		
 		result = dao.Update(bean);

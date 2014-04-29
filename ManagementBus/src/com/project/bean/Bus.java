@@ -2,17 +2,17 @@ package com.project.bean;
 
 import java.io.UnsupportedEncodingException;
 
-public class BusBean {
+public class Bus {
 	private String busNumber;
 	private String details;
 	private float cost;
 	
 	
-	public BusBean() {
+	public Bus() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-	public BusBean(String busNumber, String details, float cost) {
+	public Bus(String busNumber, String details, float cost) {
 		super();
 		this.busNumber = busNumber;
 		this.details = details;

@@ -6,7 +6,7 @@ import java.util.List;
 
 import com.mysql.jdbc.Connection;
 import com.mysql.jdbc.PreparedStatement;
-import com.project.bean.PaymentBean;
+import com.project.bean.Payment;
 import com.project.db.DBHelper;
 import com.project.db.DBTableName;
 
@@ -26,9 +26,9 @@ public class PaymentDAO implements DBTableName{
 		}
 	}
 
-	public List<PaymentBean> getAll(){
+	public List<Payment> getAll(){
 
-		List<PaymentBean> list = null;
+		List<Payment> list = null;
 
 		if (conn == null) {
 			try {
@@ -51,10 +51,10 @@ public class PaymentDAO implements DBTableName{
 					ResultSet rs = pstt.executeQuery();
 
 					// RegionBean tamp = new RegionBean();
-					list = new ArrayList<PaymentBean>();
+					list = new ArrayList<Payment>();
 
 					while (rs.next()) {
-						list.add(new PaymentBean(
+						list.add(new Payment(
 								rs.getInt(STATIC_PAYMENT_PAYMENTNUMBER),
 								rs.getString(STATIC_PAYMENT_DATE) ,
 								rs.getString(STATIC_PAYMENT_PLACE),
@@ -80,7 +80,7 @@ public class PaymentDAO implements DBTableName{
 	/*
 	 * Insert table
 	 */
-	public int Insert(PaymentBean bean) {
+	public int Insert(Payment bean) {
 		int result = 0;
 		// Bat ngoai le chua khoi tao .
 		if (conn == null) {
@@ -124,7 +124,7 @@ public class PaymentDAO implements DBTableName{
 	/*
 	 * Update table
 	 */
-	public int Update(PaymentBean bean) {
+	public int Update(Payment bean) {
 		// TODO Auto-generated method stub
 		int result = 0;
 		if (conn == null) {

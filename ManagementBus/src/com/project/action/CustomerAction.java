@@ -1,108 +1,183 @@
 package com.project.action;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+
+import org.apache.commons.io.FileUtils;
+import org.apache.struts2.interceptor.ServletRequestAware;
+
 import com.opensymphony.xwork2.ActionSupport;
-import com.project.bean.BusBean;
-import com.project.bean.CustomerBean;
-import com.project.bean.KindBean;
+import com.project.bean.Bus;
+import com.project.bean.Customer;
+import com.project.bean.Kind;
 import com.project.controller.BusController;
 import com.project.controller.CustomerController;
 import com.project.controller.KindController;
 
-public class CustomerAction extends ActionSupport{
+public class CustomerAction extends ActionSupport implements
+ServletRequestAware {
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	
-	List<CustomerBean> listCustomer = new ArrayList<CustomerBean>();
-	List<KindBean> listKind;
-	List<BusBean> listBus;
+
+	private File userImage;
+	private String userImageContentType;
+	private String userImageFileName;
+
+	private HttpServletRequest servletRequest;
+
+	List<Customer> listCustomer = new ArrayList<Customer>();
+	List<Customer> list = new ArrayList<Customer>();
+	List<Kind> listKind;
+	List<Bus> listBus;
 	List<String> listActived = new ArrayList<String>();
-	CustomerBean customer = new CustomerBean(); 
+	Customer customer = new Customer(); 
 	String customerID = null;
-	
-	
+
+
 	CustomerController connC = new CustomerController();
 	KindController connK = new KindController();
 	BusController connB = new BusController();
+
+	int pageUp = 0, pageDown = 0;
+	int pageIndex = 1;
+	int totalPage = connC.getAll().size() / 10 + 1;
 
 	/**
 	 * Ham nay thuc hien get list 
 	 * @return
 	 */
 	public String list(){
-		listCustomer = connC.view();
+		list = connC.getAll();
+		int index = 0;
+		if(pageIndex < totalPage) {
+			index = pageIndex * 10;
+		} else {
+			index = list.size();
+		}
+		for(int i = (pageIndex - 1) * 10; i < index; i++) {
+			listCustomer.add(list.get(i));				
+		}
 		return "list";
 	}
 
 	public String add(){
-		
-		listKind = connK.view();
-		
-		listBus = connB.view();
-				
-		listActived.add("Có");
-		listActived.add("Không");
+
+		listKind = connK.getAll();
+
+		listBus = connB.getAll();
+
+		listActived.add("CÃ³");
+		listActived.add("KhÃ´ng");
 
 		return "add";
 	}
-	
+
 	public String create(){
 		connC.Insert(customer);
 		return list();
 	}
-	
-	
+
+
 	public String details(){
-		listKind = connK.view();
-		
-		listBus = connB.view();
-				
-		listActived.add("Có");
-		listActived.add("Không");
-		
+		listKind = connK.getAll();
+
+		listBus = connB.getAll();
+
+		listActived.add("CÃ³");
+		listActived.add("KhÃ´ng");
+
 		customer = connC.search(customerID);
 
-		
+
 		return "details";
 	}
-	
+
 	public String update(){
 		connC.Update(customer);
-		
+
 		return list();
 	}
+
+	public String upload(){
+		return "upload";
+	}
 	
-	public List<CustomerBean> getListCustomer() {
+	public String execute() {
+		try {
+
+			String filePath = servletRequest.getSession().getServletContext().getRealPath("/") +
+					"images\\customers";
+			System.out.println("Server path:" + filePath);
+			File fileToCreate = new File(filePath, this.userImageFileName);
+
+			FileUtils.copyFile(this.userImage, fileToCreate);
+		} catch (Exception e) {
+			e.printStackTrace();
+			addActionError(e.getMessage());
+
+			return INPUT;
+		}
+		
+		connC.search(customerID);
+		customer.setImage(userImageFileName);
+		connC.Update(customer);
+		
+		return SUCCESS;
+	}
+	
+
+	public String page() {
+		if(pageUp != 0) {
+			pageIndex = pageUp;
+			if(pageIndex < totalPage) {
+				pageIndex++;
+			}
+		}
+		
+		if(pageDown != 0) {
+			pageIndex = pageDown;
+			if(pageIndex > 1) {
+				pageIndex--;
+			}
+		}
+
+		list();
+		return "page";
+	}
+
+
+	public List<Customer> getListCustomer() {
 		return listCustomer;
 	}
 
 
 
-	public void setListCustomer(List<CustomerBean> listCustomer) {
+	public void setListCustomer(List<Customer> listCustomer) {
 		this.listCustomer = listCustomer;
 	}
 
 
-	public List<KindBean> getListKind() {
+	public List<Kind> getListKind() {
 		return listKind;
 	}
 
 
-	public void setListKind(List<KindBean> listKind) {
+	public void setListKind(List<Kind> listKind) {
 		this.listKind = listKind;
 	}
 
 
-	public List<BusBean> getListBus() {
+	public List<Bus> getListBus() {
 		return listBus;
 	}
 
 
-	public void setListBus(List<BusBean> listBus) {
+	public void setListBus(List<Bus> listBus) {
 		this.listBus = listBus;
 	}
 
@@ -117,12 +192,12 @@ public class CustomerAction extends ActionSupport{
 	}
 
 
-	public CustomerBean getCustomer() {
+	public Customer getCustomer() {
 		return customer;
 	}
 
 
-	public void setCustomer(CustomerBean customer) {
+	public void setCustomer(Customer customer) {
 		this.customer = customer;
 	}
 
@@ -134,5 +209,67 @@ public class CustomerAction extends ActionSupport{
 		this.customerID = customerID;
 	}
 
+	public File getUserImage() {
+		return userImage;
+	}
 
+	public void setUserImage(File userImage) {
+		this.userImage = userImage;
+	}
+
+	public String getUserImageContentType() {
+		return userImageContentType;
+	}
+
+	public void setUserImageContentType(String userImageContentType) {
+		this.userImageContentType = userImageContentType;
+	}
+
+	public String getUserImageFileName() {
+		return userImageFileName;
+	}
+
+	public void setUserImageFileName(String userImageFileName) {
+		this.userImageFileName = userImageFileName;
+	}
+
+	@Override
+	public void setServletRequest(HttpServletRequest servletRequest) {
+		this.servletRequest = servletRequest;
+
+	}
+
+	public int getPageUp() {
+		return pageUp;
+	}
+
+	public void setPageUp(int pageUp) {
+		this.pageUp = pageUp;
+	}
+
+	public int getPageDown() {
+		return pageDown;
+	}
+
+	public void setPageDown(int pageDown) {
+		this.pageDown = pageDown;
+	}
+
+	public int getPageIndex() {
+		return pageIndex;
+	}
+
+	public void setPageIndex(int pageIndex) {
+		this.pageIndex = pageIndex;
+	}
+
+	public int getTotalPage() {
+		return totalPage;
+	}
+
+	public void setTotalPage(int totalPage) {
+		this.totalPage = totalPage;
+	}
+	
+	
 }

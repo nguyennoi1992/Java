@@ -10,13 +10,14 @@
 <title>Chi tiết</title>
 </head>
 <body>
+	<h1 align="center">Chi tiết</h1>
 	<s:form action="createKind" method="post" id="viewCustomer">
 		<table width="100%" align="center"
 			style="border: hidden; background-color: #F3F1EB;">
 			<tr style="border: hidden; background-color: #F3F1EB;">
 				<td width="20%">Số thẻ:</td>
 				<td width="20%"><s:textfield name="kind.kindNumber"
-						theme="simple"></s:textfield></td>
+						theme="simple" disabled="true"></s:textfield></td>
 				<td width="10%"></td>
 				<td width="20%">Kiểu thẻ</td>
 				<td width="20%"><s:textfield name="kind.type" theme="simple"></s:textfield></td>

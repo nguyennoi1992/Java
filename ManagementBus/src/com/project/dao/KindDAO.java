@@ -6,7 +6,7 @@ import java.util.List;
 
 import com.mysql.jdbc.Connection;
 import com.mysql.jdbc.PreparedStatement;
-import com.project.bean.KindBean;
+import com.project.bean.Kind;
 import com.project.db.DBHelper;
 import com.project.db.DBTableName;
 
@@ -26,9 +26,9 @@ public class KindDAO implements DBTableName{
 		}
 	}
 	
-	public List<KindBean> getAll(){
+	public List<Kind> getAll(){
 		
-		List<KindBean> list = null;
+		List<Kind> list = null;
 		
 		if (conn == null) {
 			try {
@@ -51,10 +51,10 @@ public class KindDAO implements DBTableName{
 					ResultSet rs = pstt.executeQuery();
 
 					// RegionBean tamp = new RegionBean();
-					list = new ArrayList<KindBean>();
+					list = new ArrayList<Kind>();
 
 					while (rs.next()) {
-						list.add(new KindBean(
+						list.add(new Kind(
 								rs.getInt(STATIC_KIND_KINDNUMBER),
 								rs.getString(STATIC_KIND_KIND) ,
 								rs.getString(STATIC_KIND_TYPE),
@@ -79,7 +79,7 @@ public class KindDAO implements DBTableName{
 	/*
 	 * Insert table
 	 */
-	public int Insert(KindBean bean) {
+	public int Insert(Kind bean) {
 		int result = 0;
 		// Bat ngoai le chua khoi tao .
 		if (conn == null) {
@@ -123,7 +123,7 @@ System.out.println(query);
 	/*
 	 * Update table
 	 */
-	public int Update(KindBean bean) {
+	public int Update(Kind bean) {
 		// TODO Auto-generated method stub
 		int result = 0;
 		if (conn == null) {
@@ -158,7 +158,7 @@ System.out.println(query);
 		return result;
 	}
 
-	public KindBean search(int ID){
+	public Kind search(int ID){
 		if (conn == null) {
 			try {
 				conn = (Connection) DBHelper.getConnection();
@@ -167,7 +167,7 @@ System.out.println(query);
 			}
 
 		}
-		KindBean bean = new KindBean();
+		Kind bean = new Kind();
 		String query = "SELECT * FROM " + STATIC_KIND_TBNAME + " WHERE " + STATIC_KIND_KINDNUMBER + " = " + ID +"";
 		System.out.println(query);
 		PreparedStatement pstt = null;
@@ -181,7 +181,7 @@ System.out.println(query);
 				// RegionBean tamp = new RegionBean();
 
 				while (rs.next()) {
-					bean = new KindBean(
+					bean = new Kind(
 							rs.getInt(STATIC_KIND_KINDNUMBER),
 							rs.getString(STATIC_KIND_KIND) ,
 							rs.getString(STATIC_KIND_TYPE),

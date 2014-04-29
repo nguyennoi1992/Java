@@ -6,7 +6,7 @@ import java.util.List;
 
 import com.mysql.jdbc.Connection;
 import com.mysql.jdbc.PreparedStatement;
-import com.project.bean.BusBean;
+import com.project.bean.Bus;
 import com.project.db.DBHelper;
 import com.project.db.DBTableName;
 
@@ -26,9 +26,9 @@ public class BusDAO implements DBTableName{
 		}
 	}
 	
-	public List<BusBean> getAll(){
+	public List<Bus> getAll(){
 		
-		List<BusBean> list = null;
+		List<Bus> list = null;
 		
 		if (conn == null) {
 			try {
@@ -51,10 +51,10 @@ public class BusDAO implements DBTableName{
 					ResultSet rs = pstt.executeQuery();
 
 					// RegionBean tamp = new RegionBean();
-					list = new ArrayList<BusBean>();
+					list = new ArrayList<Bus>();
 
 					while (rs.next()) {
-						list.add(new BusBean(
+						list.add(new Bus(
 								rs.getString(STATIC_BUS_BUSNUMBER),
 								rs.getString(STATIC_BUS_DETAILS) ,
 								rs.getFloat(STATIC_BUS_COST)
@@ -78,7 +78,7 @@ public class BusDAO implements DBTableName{
 	/*
 	 * Insert table
 	 */
-	public int Insert(BusBean bean) {
+	public int Insert(Bus bean) {
 		int result = 0;
 		// Bat ngoai le chua khoi tao .
 		if (conn == null) {
@@ -120,7 +120,7 @@ public class BusDAO implements DBTableName{
 	/*
 	 * Update table
 	 */
-	public int Update(BusBean bean) {
+	public int Update(Bus bean) {
 		// TODO Auto-generated method stub
 		int result = 0;
 		if (conn == null) {
@@ -154,7 +154,7 @@ public class BusDAO implements DBTableName{
 		return result;
 	}
 
-	public BusBean search(String ID){
+	public Bus search(String ID){
 		if (conn == null) {
 			try {
 				conn = (Connection) DBHelper.getConnection();
@@ -163,7 +163,7 @@ public class BusDAO implements DBTableName{
 			}
 
 		}
-		BusBean bean = new BusBean();
+		Bus bean = new Bus();
 		String query = "SELECT * FROM " + STATIC_BUS_TBNAME + " WHERE " + STATIC_BUS_BUSNUMBER + " = '" + ID +"'";
 		System.out.println(query);
 		PreparedStatement pstt = null;
@@ -177,7 +177,7 @@ public class BusDAO implements DBTableName{
 				// RegionBean tamp = new RegionBean();
 
 				while (rs.next()) {
-					bean = new BusBean(
+					bean = new Bus(
 							rs.getString(STATIC_BUS_BUSNUMBER),
 							rs.getString(STATIC_BUS_DETAILS) ,
 							rs.getFloat(STATIC_BUS_COST)

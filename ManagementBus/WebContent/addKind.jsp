@@ -10,7 +10,7 @@
 <title>Thêm loại thẻ mới</title>
 </head>
 <body>
-	<s:form action="createKind" method="post" id="viewCustomer">
+	<s:form action="createKind" method="post" id="viewCustomer" acceptcharset="utf-8">
 		<table width="100%" align="center"
 			style="border: hidden; background-color: #F3F1EB;">
 			<tr style="border: hidden; background-color: #F3F1EB;">

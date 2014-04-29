@@ -22,6 +22,7 @@ public interface DBTableName {
 	public static String STATIC_CUSTOMERS_FIRSTNAME = "firstName";
 	public static String STATIC_CUSTOMERS_LASTNAME = "lastname";
 	public static String STATIC_CUSTOMERS_DATEOFBIRTH = "dateOfBirth";
+	public static String STATIC_CUSTOMERS_IMAGE = "image";
 	public static String STATIC_CUSTOMERS_DATELIMIT = "dateLimit";
 	public static String STATIC_CUSTOMERS_PHONENUMBER = "phoneNumber";
 	public static String STATIC_CUSTOMERS_ADDRESS = "address";

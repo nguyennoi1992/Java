@@ -11,12 +11,26 @@
 <title>Chi tiết</title>
 </head>
 <body>
+	<h1 align="center">Chi tiết</h1>
 	<s:form action="updateCustomer" method="post" id="viewCustomer">
+		<s:hidden name="customer.customerNumber"></s:hidden>
 		<table width="100%" align="center">
+			<tr>
+				<td width="20%"></td>
+				<td width="20%"></td>
+				<td width="10%"><a
+					href="uploadCustomer.action?customerID=<s:property value="customer.customerNumber"/>">
+						<img src="images/customers/<s:property value="customer.image"/>"
+						style="height: auto; width: 125px; border-width: 0px;"
+						align="middle" />
+				</a></td>
+				<td width="20%"></td>
+				<td width="20%"></td>
+			</tr>
 			<tr>
 				<td width="20%">Mã người dùng:</td>
 				<td width="20%"><s:textfield name="customer.customerNumber"
-						theme="simple"></s:textfield></td>
+						theme="simple" disabled="true"></s:textfield></td>
 				<td width="10%"></td>
 				<td width="20%">Trường/Công ty:</td>
 				<td width="20%"><s:textfield name="customer.schoolOrCompany"

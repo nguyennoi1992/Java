@@ -20,17 +20,21 @@
 
 		<table width="100%">
 			<tr align="center">
-				<th>Số thẻ</th>
-				<th>Loại</th>
-				<th>Kiểu</th>
-				<th>Hạng</th>
+				<th width="10%">Số thẻ</th>
+				<th width="30%">Loại</th>
+				<th width="30%">Kiểu</th>
+				<th width="30%">Hạng</th>
 			</tr>
 			<s:iterator value="listKind" var="kin">
 				<tr align="center">
-					<td><s:submit name="kindID" value="%{#kin.kindNumber}"
+					<%-- 					<td><s:submit name="kindID" value="%{#kin.kindNumber}"
 							id="%{#kin.kindNumber}" theme="simple" cssClass="hidden" /> <label
 						for="<s:property value="#kin.kindNumber"/>"><s:property
-								value="#kin.kindNumber" /> </label></td>
+								value="#kin.kindNumber" /> </label></td> --%>
+					<td><a
+						href="detailsKind.action?kindID=<s:property
+								value="#kin.kindNumber" />"><s:property
+								value="#kin.kindNumber" /> </a></td>
 					<td><s:property value="#kin.kind" /></td>
 					<td><s:property value="#kin.type" /></td>
 					<td><s:property value="#kin.category" /></td>
@@ -38,5 +42,18 @@
 			</s:iterator>
 		</table>
 	</s:form>
+	<table width="29%" align="right" border="0">
+		<tr>
+			<th align="center" style="color: black;"><a
+				href="pageKind.action?pageDown=<s:property value="pageIndex"/>">
+					&lt;&lt; </a></th>
+			<td><s:property value="pageIndex" /> / <s:property
+					value="totalPage" /></td>
+			<th align="center" style="color: black;"><a
+				href="pageKind.action?pageUp=<s:property value="pageIndex"/>">
+					&gt;&gt; </a></th>
+
+		</tr>
+	</table>
 </body>
 </html>

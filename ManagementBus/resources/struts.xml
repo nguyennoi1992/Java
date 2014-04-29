@@ -36,10 +36,21 @@
 
 		<action name="*Customer" method="{1}"
 			class="com.project.action.CustomerAction">
+			<interceptor-ref name="fileUpload">
+				<param name="maximumSize">2097152</param>
+				<param name="allowedTypes">
+					image/png,image/gif,image/jpeg,image/pjpeg
+				</param>
+			</interceptor-ref>
+			<interceptor-ref name="defaultStack"></interceptor-ref>
+			<result name="upload" type="tiles">customerImage</result>
+			<result name="success" type="tiles">detailsCustomer</result>
+			<result name="input" type="tiles">customerImage</result>
 			<result name="list" type="tiles">customer</result>
 			<result name="add" type="tiles">addCustomer</result>
 			<result name="details" type="tiles">detailsCustomer</result>
 			<result name="update" type="tiles">customer</result>
+			<result name="page" type="tiles">customer</result>
 		</action>
 
 		<action name="*Kind" method="{1}" class="com.project.action.KindAction">
@@ -47,6 +58,7 @@
 			<result name="add" type="tiles">addKind</result>
 			<result name="details" type="tiles">detailsKind</result>
 			<result name="update" type="tiles">kind</result>
+			<result name="page" type="tiles">kind</result>
 		</action>
 
 		<action name="*Bus" method="{1}" class="com.project.action.BusAction">
@@ -54,11 +66,14 @@
 			<result name="add" type="tiles">addBus</result>
 			<result name="details" type="tiles">detailsBus</result>
 			<result name="update" type="tiles">kind</result>
+			<result name="page" type="tiles">bus</result>
 		</action>
 
 		<action name="*Payment" method="{1}"
 			class="com.project.action.PaymentAction">
 			<result name="list" type="tiles">payment</result>
+			<result name="page" type="tiles">payment</result>
 		</action>
+
 	</package>
 </struts>

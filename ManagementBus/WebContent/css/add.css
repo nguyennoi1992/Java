@@ -54,12 +54,7 @@
 	color: #99CC33;
 }
 
-/* This matchs tabs displaying to thier associated radio inputs */
-#rad1:checked ~ .tab1,#rad2:checked ~ .tab2,#rad3:checked ~ .tab3,#rad4:checked 
-	~ .tab4,#rad5:checked ~ .tab5,#rad6:checked ~ .tab6,#rad7:checked ~
-	.tab7,#rad8:checked ~ .tab8 {
-	display: block;
-}
+
 
 .tabGroup1 {
 	font-family: 'Times New Roman';
@@ -119,9 +114,4 @@
 	border-radius: 0 5px 5px 5px;
 	-moz-border-radius: 0 5px 5px 5px;
 	-webkit-border-radius: 0 5px 5px 5px;
-}
-
-/* This matchs tabs displaying to thier associated radio inputs */
-#rad1:checked ~ .tab1,#rad2:checked ~ .tab2,#rad3:checked ~ .tab3 {
-	display: block;
 }

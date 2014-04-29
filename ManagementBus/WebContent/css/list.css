@@ -107,9 +107,3 @@ tr:nth-child(2n+1) {
 table tr td:first-child {
 	color: blue;
 }
-/* This matchs tabs displaying to thier associated radio inputs */
-#rad1:checked  ~ .tab1,#rad2:checked  ~ .tab1,#rad3:checked  ~ .tab1,#rad4:checked 
-	  ~ .tab1,#rad5:checked  ~ .tab1,#rad6:checked  ~ .tab1,#rad7:checked 
-	~ .tab1,#rad8:checked  ~ .tab1 {
-	display: block;
-}

@@ -7,7 +7,7 @@ import java.security.NoSuchAlgorithmException;
 
 import com.project.utilities.ProjectConstants;
 
-public class UserBean implements ProjectConstants {
+public class User implements ProjectConstants {
 	
 	private String username;
 	private String password;

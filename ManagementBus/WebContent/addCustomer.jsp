@@ -11,7 +11,7 @@
 <title>Thêm người dùng mới</title>
 </head>
 <body>
-	<s:form action="createCustomer" method="post" id="viewCustomer">
+	<s:form action="createCustomer" method="post" id="viewCustomer" acceptcharset="utf-8">
 		<table width="100%" align="center">
 			<tr>
 				<td width="20%">Mã người dùng:</td>

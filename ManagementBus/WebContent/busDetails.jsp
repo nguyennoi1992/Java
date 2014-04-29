@@ -10,18 +10,18 @@
 <title>Chi tiết</title>
 </head>
 <body>
+	<h1 align="center">Chi tiết</h1>
 	<s:form action="createBus" method="post" id="viewCustomer">
 		<table width="100%" align="center"
 			style="border: hidden; background-color: #F3F1EB;">
 			<tr style="border: hidden; background-color: #F3F1EB;">
 				<td width="20%">Tuyến xe bus:</td>
 				<td width="20%"><s:textfield name="bus.busNumber"
-						theme="simple"></s:textfield></td>
-				</tr>
+						theme="simple" disabled="true"></s:textfield></td>
+			</tr>
 			<tr style="border: hidden; background-color: #F3F1EB;">
 				<td width="20%">Chi tiết:</td>
-				<td width="20%"><s:textfield name="bus.details"
-						theme="simple"></s:textfield></td>
+				<td width="20%"><s:textfield name="bus.details" theme="simple"></s:textfield></td>
 			</tr>
 			<tr style="border: hidden; background-color: #F3F1EB;">
 
@@ -33,5 +33,4 @@
 		<span style="float: center;"> <s:submit name="create"
 				value="Lưu" align="center"></s:submit></span>
 	</s:form>
-
 </html>

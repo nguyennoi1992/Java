@@ -3,7 +3,7 @@ package com.project.controller;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.project.bean.CustomerBean;
+import com.project.bean.Customer;
 import com.project.dao.CustomerDAO;
 
 public class CustomerController {
@@ -15,9 +15,9 @@ public class CustomerController {
 		// TODO Auto-generated constructor stub
 	}
 
-	public List<CustomerBean> view(){
-		List<CustomerBean> list = new ArrayList<CustomerBean>();
-		List<CustomerBean> listAll = dao.getAll();
+	public List<Customer> getAll(){
+		List<Customer> list = new ArrayList<Customer>();
+		List<Customer> listAll = dao.getAll();
 		for(int i = 0; i < listAll.size(); i++){
 			list.add(listAll.get(i));
 		}
@@ -25,7 +25,7 @@ public class CustomerController {
 		return list;
 	}
 	
-	public int Insert(CustomerBean bean){
+	public int Insert(Customer bean){
 		int result = 0;
 		
 		result = dao.Insert(bean);
@@ -33,15 +33,15 @@ public class CustomerController {
 		return result;
 	}
 	
-	public CustomerBean search(String ID) {
-		CustomerBean bean = new CustomerBean();
+	public Customer search(String ID) {
+		Customer bean = new Customer();
 		
 		bean  = dao.search(ID);
 		
 		return bean;
 	}
 	
-	public int Update(CustomerBean bean){
+	public int Update(Customer bean){
 		int result = 0;
 		
 		result = dao.Update(bean);

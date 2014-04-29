@@ -6,7 +6,7 @@ import java.util.List;
 
 import com.mysql.jdbc.Connection;
 import com.mysql.jdbc.PreparedStatement;
-import com.project.bean.CustomerBean;
+import com.project.bean.Customer;
 import com.project.db.DBHelper;
 import com.project.db.DBTableName;
 
@@ -26,9 +26,9 @@ public class CustomerDAO implements DBTableName{
 		}
 	}
 	
-	public List<CustomerBean> getAll(){
+	public List<Customer> getAll(){
 		
-		List<CustomerBean> list = null;
+		List<Customer> list = null;
 		
 		if (conn == null) {
 			try {
@@ -51,14 +51,15 @@ public class CustomerDAO implements DBTableName{
 					ResultSet rs = pstt.executeQuery();
 
 					// RegionBean tamp = new RegionBean();
-					list = new ArrayList<CustomerBean>();
+					list = new ArrayList<Customer>();
 
 					while (rs.next()) {
-						list.add(new CustomerBean(
+						list.add(new Customer(
 								rs.getString(STATIC_CUSTOMERS_CUSTOMERNUMBER),
 								rs.getString(STATIC_CUSTOMERS_FIRSTNAME) ,
 								rs.getString(STATIC_CUSTOMERS_LASTNAME),
 								rs.getString(STATIC_CUSTOMERS_DATEOFBIRTH),
+								rs.getString(STATIC_CUSTOMERS_IMAGE),
 								rs.getString(STATIC_CUSTOMERS_DATELIMIT),
 								rs.getString(STATIC_CUSTOMERS_PHONENUMBER),
 								rs.getString(STATIC_CUSTOMERS_ADDRESS),
@@ -90,7 +91,7 @@ public class CustomerDAO implements DBTableName{
 	/*
 	 * Insert table
 	 */
-	public int Insert(CustomerBean bean) {
+	public int Insert(Customer bean) {
 		int result = 0;
 		// Bat ngoai le chua khoi tao .
 		if (conn == null) {
@@ -109,6 +110,7 @@ public class CustomerDAO implements DBTableName{
 					+ STATIC_CUSTOMERS_FIRSTNAME + ", "
 					+ STATIC_CUSTOMERS_LASTNAME + ", "
 					+ STATIC_CUSTOMERS_DATEOFBIRTH + ", "
+					+ STATIC_CUSTOMERS_IMAGE + ", "
 					+ STATIC_CUSTOMERS_DATELIMIT + ", "
 					+ STATIC_CUSTOMERS_PHONENUMBER + ", "
 					+ STATIC_CUSTOMERS_ADDRESS + ", "
@@ -124,6 +126,7 @@ public class CustomerDAO implements DBTableName{
 					+ bean.getFirstName() + "','"
 					+ bean.getLastName() + "','"
 					+ bean.getDateOfBirth() + "','"
+					+ bean.getImage() + "','"
 					+ bean.getDateLimit() + "','"
 					+ bean.getPhoneNumber() + "','"
 					+ bean.getAddress() + "','"
@@ -154,7 +157,7 @@ System.out.println("INSERT" + query);
 	/*
 	 * Update table
 	 */
-	public int Update(CustomerBean bean) {
+	public int Update(Customer bean) {
 		// TODO Auto-generated method stub
 		int result = 0;
 		if (conn == null) {
@@ -170,6 +173,7 @@ System.out.println("INSERT" + query);
 					+ STATIC_CUSTOMERS_FIRSTNAME + " = '" + bean.getFirstName() + "', " 
 					+ STATIC_CUSTOMERS_LASTNAME + " = '" + bean.getLastName() + "', " 
 					+ STATIC_CUSTOMERS_DATEOFBIRTH + " = '" + bean.getDateOfBirth() + "', " 
+					+ STATIC_CUSTOMERS_IMAGE + " = '" + bean.getImage() + "', " 
 					+ STATIC_CUSTOMERS_DATELIMIT + " = '" + bean.getDateLimit() + "', " 
 					+ STATIC_CUSTOMERS_PHONENUMBER + " = '" + bean.getPhoneNumber() + "', " 
 					+ STATIC_CUSTOMERS_ADDRESS + " = '" + bean.getAddress() + "', " 
@@ -199,7 +203,7 @@ System.out.println("UPDATE" + query);
 		return result;
 	}
 	
-	public CustomerBean search(String ID){
+	public Customer search(String ID){
 		if (conn == null) {
 			try {
 				conn = (Connection) DBHelper.getConnection();
@@ -208,7 +212,7 @@ System.out.println("UPDATE" + query);
 			}
 
 		}
-		CustomerBean bean = new CustomerBean();
+		Customer bean = new Customer();
 		String query = "SELECT * FROM " + STATIC_CUSTOMERS_TBNAME + " WHERE " + STATIC_CUSTOMERS_CUSTOMERNUMBER + " = '" + ID +"'";
 		System.out.println(query);
 		PreparedStatement pstt = null;
@@ -222,11 +226,12 @@ System.out.println("UPDATE" + query);
 				// RegionBean tamp = new RegionBean();
 
 				while (rs.next()) {
-					bean = new CustomerBean(
+					bean = new Customer(
 							rs.getString(STATIC_CUSTOMERS_CUSTOMERNUMBER),
 							rs.getString(STATIC_CUSTOMERS_FIRSTNAME) ,
 							rs.getString(STATIC_CUSTOMERS_LASTNAME),
 							rs.getString(STATIC_CUSTOMERS_DATEOFBIRTH),
+							rs.getString(STATIC_CUSTOMERS_IMAGE),
 							rs.getString(STATIC_CUSTOMERS_DATELIMIT),
 							rs.getString(STATIC_CUSTOMERS_PHONENUMBER),
 							rs.getString(STATIC_CUSTOMERS_ADDRESS),

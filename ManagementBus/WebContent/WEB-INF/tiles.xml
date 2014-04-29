@@ -52,4 +52,9 @@
 	<definition name="detailsBus" extends="baseLayout">
 		<put-attribute name="body" value="/busDetails.jsp" />
 	</definition>
-</tiles-definitions>
+
+	<definition name="customerImage" extends="baseLayout">
+		<put-attribute name="body" value="/userImage.jsp" />
+	</definition>
+	
+	</tiles-definitions>

@@ -3,7 +3,7 @@ package com.project.controller;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.project.bean.BusBean;
+import com.project.bean.Bus;
 import com.project.dao.BusDAO;
 
 
@@ -16,9 +16,9 @@ public class BusController {
 		// TODO Auto-generated constructor stub
 	}
 
-	public List<BusBean> view(){
-		List<BusBean> list = new ArrayList<BusBean>();
-		List<BusBean> listAll = dao.getAll();
+	public List<Bus> getAll(){
+		List<Bus> list = new ArrayList<Bus>();
+		List<Bus> listAll = dao.getAll();
 		for(int i = 0; i < listAll.size(); i++){
 			list.add(listAll.get(i));
 		}
@@ -26,7 +26,7 @@ public class BusController {
 		return list;
 	}
 	
-	public int Insert(BusBean bean){
+	public int Insert(Bus bean){
 		int result = 0;
 		
 		result = dao.Insert(bean);
@@ -34,15 +34,15 @@ public class BusController {
 		return result;
 	}
 	
-	public BusBean search(String ID) {
-		BusBean bean = new BusBean();
+	public Bus search(String ID) {
+		Bus bean = new Bus();
 		
 		bean  = dao.search(ID);
 		
 		return bean;
 	}
 	
-	public int Update(BusBean bean){
+	public int Update(Bus bean){
 		int result = 0;
 		
 		result = dao.Update(bean);

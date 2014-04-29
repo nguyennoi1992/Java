@@ -1,14 +1,15 @@
 package com.project.bean;
 
-public class PaymentBean {
+public class Payment {
 
 	private int paymentNumber;
 	private String date;
 	private String place;
 	private String customerNumber;
 	private String busNumber;
+	private String name;
 
-	public PaymentBean(int paymentNumber, String date, String place,
+	public Payment(int paymentNumber, String date, String place,
 			String customerNumber, String busNumber) {
 		super();
 		this.paymentNumber = paymentNumber;
@@ -48,6 +49,16 @@ public class PaymentBean {
 	}
 	public void setBusNumber(String busNumber) {
 		this.busNumber = busNumber;
+	}
+
+
+	public String getName() {
+		return name;
+	}
+
+
+	public void setName(String name) {
+		this.name = name;
 	}
 
 

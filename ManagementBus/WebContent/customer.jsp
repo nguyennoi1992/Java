@@ -19,26 +19,35 @@
 	<s:form action="detailsCustomer" method="post">
 		<table width="100%">
 			<tr align="center">
-				<th>Mã khách hàng</th>
-				<th>Họ và tên</th>
-				<th>Ngày sinh</th>
-				<th>Ngày hết hạn</th>
-				<th>Số điện thoại</th>
-				<th>Địa chỉ</th>
-				<th>Trường/Công ty</th>
-				<th>Nghề nghiệp</th>
-				<th>Số dư tài khoản</th>
-				<th>Nơi đăng ký</th>
-				<th>Loại thẻ</th>
-				<th>Tuyến xe bus</th>
-				<th>Kích hoạt</th>
+				<th width="10%">Mã khách hàng</th>
+				<th width="15%">Họ và tên</th>
+				<th width="5%">Ngày sinh</th>
+				<th width="5%">Ngày hết hạn</th>
+				<th width="5%">Số điện thoại</th>
+				<th width="10%">Địa chỉ</th>
+				<th width="10%">Trường/Công ty</th>
+				<th width="5%">Nghề nghiệp</th>
+				<th width="5%">Số dư tài khoản</th>
+				<th width="15%">Nơi đăng ký</th>
+				<th width="5%">Loại thẻ</th>
+				<th width="2%">Kích hoạt</th>
 			</tr>
 			<s:iterator value="listCustomer" var="cus">
 				<tr align="center">
-					<td><s:submit name="customerID" value="%{#cus.customerNumber}"
+					<%-- 					<td><img
+						src="images/customers/<s:property value="#cus.image"/>"
+						style="height: auto; width: 125px; border-width: 0px;" /> <s:submit
+							name="customerID" value="%{#cus.customerNumber}"
 							id="%{#cus.customerNumber}" theme="simple" cssClass="hidden" />
 						<label for="<s:property value="#cus.customerNumber"/>"><s:property
-								value="#cus.customerNumber" /> </label></td>
+								value="#cus.customerNumber" /> </label></td> --%>
+					<td><a
+						href="detailsCustomer.action?customerID=<s:property
+								value="#cus.customerNumber" />">
+							<img src="images/customers/<s:property value="#cus.image"/>"
+							style="height: auto; width: 125px; border-width: 0px;" /> <s:property
+								value="#cus.customerNumber" />
+					</a></td>
 					<td><s:property value="#cus.firstName" /> <s:property
 							value="#cus.lastName" /></td>
 					<td><s:property value="#cus.dateOfBirth" /></td>
@@ -50,11 +59,23 @@
 					<td><s:property value="#cus.balance" /> đ</td>
 					<td><s:property value="#cus.placeEnroll" /></td>
 					<td><s:property value="#cus.kindNumber" /></td>
-					<td><s:property value="#cus.busNumber" /></td>
 					<td><s:property value="#cus.Actived" /></td>
 				</tr>
 			</s:iterator>
 		</table>
 	</s:form>
+	<table width="29%" align="right" border="0">
+		<tr>
+			<th align="center" style="color: black;"><a
+				href="pageCustomer.action?pageDown=<s:property value="pageIndex"/>">
+					&lt;&lt; </a></th>
+			<td><s:property value="pageIndex" /> / <s:property
+					value="totalPage" /></td>
+			<th align="center" style="color: black;"><a
+				href="pageCustomer.action?pageUp=<s:property value="pageIndex"/>">
+					&gt;&gt; </a></th>
+
+		</tr>
+	</table>
 </body>
 </html>

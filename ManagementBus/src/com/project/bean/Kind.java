@@ -1,17 +1,17 @@
 package com.project.bean;
 
-public class KindBean {
+public class Kind {
 	private int kindNumber;
 	private String kind;
 	private String type;
 	private String category;
 	
 	
-	public KindBean() {
+	public Kind() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-	public KindBean(int kindNumber, String kind, String type, String category) {
+	public Kind(int kindNumber, String kind, String type, String category) {
 		super();
 		this.kindNumber = kindNumber;
 		this.kind = kind;

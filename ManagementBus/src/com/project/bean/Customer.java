@@ -2,11 +2,12 @@ package com.project.bean;
 
 
 
-public class CustomerBean {
+public class Customer {
 	private String customerNumber;
 	private String  firstName;
 	private String lastName;
 	private String dateOfBirth;
+	private String image; 
 	private String dateLimit;
 	private String phoneNumber;
 	private String address;
@@ -19,14 +20,16 @@ public class CustomerBean {
 	private String actived;
 	
 	
-	public CustomerBean() {
+	public Customer() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 	
 
-	public CustomerBean(String customerNumber, String firstName,
-			String lastName, String dateOfBirth, String dateLimit,
+
+
+	public Customer(String customerNumber, String firstName, String lastName,
+			String dateOfBirth, String image, String dateLimit,
 			String phoneNumber, String address, String schoolOrCompany,
 			String job, float balance, String placeEnroll, int kindNumber,
 			String busNumber, String actived) {
@@ -35,6 +38,7 @@ public class CustomerBean {
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.dateOfBirth = dateOfBirth;
+		this.image = image;
 		this.dateLimit = dateLimit;
 		this.phoneNumber = phoneNumber;
 		this.address = address;
@@ -46,6 +50,8 @@ public class CustomerBean {
 		this.busNumber = busNumber;
 		this.actived = actived;
 	}
+
+
 
 
 	public String getCustomerNumber() {
@@ -142,6 +148,16 @@ public class CustomerBean {
 	}
 	public void setActived(String actived) {
 		this.actived = actived;
+	}
+
+
+	public String getImage() {
+		return image;
+	}
+
+
+	public void setImage(String image) {
+		this.image = image;
 	}
 
 

@@ -24,10 +24,23 @@
 				<td><s:property value="#pay.paymentNumber" /></td>
 				<td><s:property value="#pay.date" /></td>
 				<td><s:property value="#pay.place" /></td>
-				<td><s:property value="#pay.customerNumber" /></td>
+				<td><s:property value="#pay.name" /></td>
 				<td><s:property value="#pay.busNumber" /></td>
 			</tr>
 		</s:iterator>
+	</table>
+	<table width="29%" align="right" border="0">
+		<tr>
+			<th align="center" style="color: black;"><a
+				href="pagePayment.action?pageDown=<s:property value="pageIndex"/>">
+					&lt;&lt; </a></th>
+			<td><s:property value="pageIndex" /> / <s:property
+					value="totalPage" /></td>
+			<th align="center" style="color: black;"><a
+				href="pagePayment.action?pageUp=<s:property value="pageIndex"/>">
+					&gt;&gt; </a></th>
+
+		</tr>
 	</table>
 </body>
 </html>
