@@ -1,0 +1,109 @@
+/* Set the size and font of the tab widget */
+
+.button {
+	display: inline-block;
+	background: url(btn.bg.png) repeat-x 0px 0px;
+	padding: 5px 6px 6px 6px;
+	font-weight: bold;
+	text-shadow: 1px 1px 1px rgba(255, 255, 255, 0.5);
+	border: 1px solid rgba(0, 0, 0, 0.4);
+	-moz-border-radius: 5px;
+	-moz-box-shadow: 0px 0px 2px rgba(0, 0, 0, 0.5);
+	-webkit-border-radius: 5px;
+	-webkit-box-shadow: 0px 0px 2px rgba(0, 0, 0, 0.5);
+	margin-right: 20px;
+	margin-left: 75%;
+	background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(rgba(255, 255, 255, 1)
+		), to(rgba(185, 185, 185, 1) ) );
+	background: -moz-linear-gradient(top, rgba(255, 255, 255, 1),
+		rgba(185, 185, 185, 1) );
+}
+
+.tabGroup {
+	font-family: 'Times New Roman';
+	margin: 0 auto;
+	background: none repeat 0 0 #F3F1EB;
+	border: 1px solid #DEDBD1;
+	padding: 10px;
+	/*width: 310px; 
+    height: 300px;*/
+}
+
+.tabGroup>h1 {
+	margin: 0 auto;
+	background: none repeat 0 0 #F3F1EB;
+	/*width: 310px; 
+    height: 300px;*/
+	color: #99CC33;
+}
+
+.tabGroup>label {
+	margin: 0 auto;
+	background: none repeat 0 0 #F3F1EB;
+	/*width: 310px; 
+    height: 300px;*/
+	color: #333399;
+}
+
+/* Configure the radio buttons to hide off screen */
+.tabGroup>input[type="radio"] {
+	position: absolute;
+	left: -100px;
+	top: -100px;
+}
+
+.hidden {
+	position: absolute;
+	left: -100px;
+	top: -100px;
+}
+
+/* Focused tabs need to be highlighted as such */
+.tabGroup>input[type="radio"]:focus+label {
+	border: 1px dashed #DEDBD1;
+}
+
+/* Checked tabs must be white with the bottom border removed */
+.tabGroup>input[type="radio"]:checked+label {
+	background-color: white;
+	font-weight: bold;
+	border-bottom: 1px solid white;
+	margin-bottom: -1px;
+}
+
+/* The tab content must fill the widgets size and have a nice border */
+.tabGroup>div {
+	display: none;
+	border: 1px solid #DEDBD1;
+	background-color: white;
+	padding: 10px 10px;
+	height: 81%;
+	overflow: auto;
+	margin-top: -1px;
+	border-radius: 0 5px 5px 5px;
+	-moz-border-radius: 0 5px 5px 5px;
+	-webkit-border-radius: 0 5px 5px 5px;
+}
+
+table,td,th {
+	border: 1px solid gray;
+	border-collapse: collapse;
+	font-size: 16px;
+}
+
+th {
+	background-color: blue;
+	color: black;
+	background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(rgba(255, 255, 255, 1)
+		), to(rgba(185, 185, 185, 1) ) );
+	background: -moz-linear-gradient(top, rgba(255, 255, 255, 1),
+		rgba(185, 185, 185, 1) );
+}
+
+tr:nth-child(2n+1) {
+	background-color: #CCFFFF;
+}
+
+table tr td:first-child {
+	color: blue;
+}

@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="com.webservice.model.Customer" table="Customers">
+		<id name="customerNumber" column="CustomerNumber" type="string">
+			<generator class="native" />
+		</id>
+		<property name="firstName" column="FirstName" type="string" />
+		<property name="lastName" column="LastName" type="string" />
+		<property name="dateOfBirth" column="DateOfBirth" type="date" />
+		<property name="image" column="Image" type="string" />
+		<property name="dateLimit" column="DateLimit" type="date" />
+		<property name="phoneNumber" column="PhoneNumber" type="string" />
+		<property name="address" column="Address" type="string" />
+		<property name="schoolOrCompany" column="SchoolOrCompany"
+			type="string" />
+		<property name="job" column="Job" type="string" />
+		<property name="balance" column="Balance" type="float" />
+		<property name="placeEnroll" column="PlaceEnroll" type="string" />
+
+
+<!-- 		<many-to-one name="kindNumber" column="KindNumber" unique="true"
+			class="com.webservice.model.Kind" not-null="true" />
+		<many-to-one name="busNumber" column="BusNumber" unique="true"
+			class="com.webservice.model.Bus" not-null="true" />
+ -->
+
+		<property name="kindNumber" column="KindNumber" type="string" />
+		<property name="busNumber" column="BusNumber" type="string" />
+		<property name="actived" column="Actived" type="string" />
+
+<!-- 		<set name="customerNumber" inverse="true" cascade="all">
+			<key>
+				<column name="CustomerNumber" not-null="true" />
+			</key>
+			<one-to-many class="com.webservice.model.Payment" />
+		</set> -->
+	</class>
+</hibernate-mapping>
