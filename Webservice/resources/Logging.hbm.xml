@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="com.webservice.bean.Logging" table="Logging">
+		<id name="logNumber" column="LogNumber" type="integer">
+			<generator class="native" />
+		</id>
+		<property name="userNumber" column="UserNumber" type="string" />
+		<property name="customerNumber" column="CustomerNumber" type="string" />
+		<property name="date" column="Date" />
+		<property name="action" column="Action" type="string" />
+	</class>
+</hibernate-mapping>

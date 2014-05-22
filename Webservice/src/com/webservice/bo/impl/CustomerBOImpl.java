@@ -4,8 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.project.bo.CustomerBO;
+import com.webservice.bean.Customer;
 import com.webservice.dao.impl.CustomerDAOImpl;
-import com.webservice.model.Customer;
 
 public class CustomerBOImpl  implements CustomerBO{
 	CustomerDAOImpl dao = new CustomerDAOImpl();
@@ -17,13 +17,16 @@ public class CustomerBOImpl  implements CustomerBO{
 		this.dao = dao;
 	}
 
+	@Override
 	public List<Customer> getAll() throws Exception {
+		// TODO Auto-generated method stub
 		List<Customer> list = new ArrayList<Customer>();
 		List<Customer> l = dao.getAll();
 		for(int i = 0; i < l.size(); i++) {
 			list.add(new Customer(l.get(i).getCustomerNumber(),
 					l.get(i).getFirstName(),
 					l.get(i).getLastName(),
+					l.get(i).getSex(),
 					l.get(i).getDateOfBirth(),
 					l.get(i).getImage(),
 					l.get(i).getDateLimit(),
@@ -34,28 +37,46 @@ public class CustomerBOImpl  implements CustomerBO{
 					l.get(i).getBalance(),
 					l.get(i).getPlaceEnroll(),
 					l.get(i).getKindNumber(),
-					l.get(i).getBusNumber(),
 					l.get(i).getActived()));
 		}
 		return list;
 
 	}
 
+	@Override
 	public Customer getById(String id) throws Exception {
-		Customer u = new Customer();
-		u = dao.getById(id);
-		return u;
+		// TODO Auto-generated method stub
+		List<Customer> list = dao.getAll();
+		Customer customer = new Customer();
+		for(Customer c: list){
+			if(c.getCustomerNumber().toString().compareTo(id) == 0){
+				customer = c;
+			}
+		}
+		return customer;
 	}
 
-	public void addNew(Customer entity) throws Exception {
-		dao.addNew(entity);
+	@Override
+	public int addNew(Customer entity) throws Exception {
+		// TODO Auto-generated method stub
+		int result = 0;
+		result = dao.addNew(entity);
+		return result;
 	}
 
-	public void update(Customer entity) throws Exception {
-		dao.update(entity);
+	@Override
+	public int update(Customer entity) throws Exception {
+		// TODO Auto-generated method stub
+		int result = 0;
+		result = dao.update(entity);
+		return result;
 	}
 
-	public void delete(Customer entity) throws Exception {
-		dao.delete(entity);
+	@Override
+	public int delete(Customer entity) throws Exception {
+		// TODO Auto-generated method stub
+		int result = 0;
+		result = dao.delete(entity);
+		return result;
 	}
 }

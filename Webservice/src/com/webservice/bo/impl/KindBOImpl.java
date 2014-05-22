@@ -4,8 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.project.bo.KindBO;
+import com.webservice.bean.Kind;
 import com.webservice.dao.impl.KindDAOImpl;
-import com.webservice.model.Kind;
 
 public class KindBOImpl  implements KindBO{
 	KindDAOImpl dao = new KindDAOImpl();
@@ -17,7 +17,9 @@ public class KindBOImpl  implements KindBO{
 		this.dao = dao;
 	}
 
+	@Override
 	public List<Kind> getAll() throws Exception {
+		// TODO Auto-generated method stub
 		List<Kind> list = new ArrayList<Kind>();
 		List<Kind> l = dao.getAll();
 		for(int i = 0; i < l.size(); i++) {
@@ -30,21 +32,40 @@ public class KindBOImpl  implements KindBO{
 
 	}
 
+	@Override
 	public Kind getById(int id) throws Exception {
-		Kind u = new Kind();
-		u = dao.getById(id);
-		return u;
+		// TODO Auto-generated method stub
+		List<Kind> list = dao.getAll();
+		Kind kind = new Kind();
+		for(Kind k: list){
+			if(k.getKindNumber() == id){
+				kind = k;
+			}
+		}
+		return kind;
 	}
 
-	public void addNew(Kind entity) throws Exception {
-		dao.addNew(entity);
+	@Override
+	public int addNew(Kind entity) throws Exception {
+		// TODO Auto-generated method stub
+		int result = 0;
+		result = dao.addNew(entity);
+		return result;
 	}
 
-	public void update(Kind entity) throws Exception {
-		dao.update(entity);
+	@Override
+	public int update(Kind entity) throws Exception {
+		// TODO Auto-generated method stub
+		int result = 0;
+		result = dao.update(entity);
+		return result;
 	}
 
-	public void delete(Kind entity) throws Exception {
-		dao.delete(entity);
+	@Override
+	public int delete(Kind entity) throws Exception {
+		// TODO Auto-generated method stub
+		int result = 0;
+		result = dao.delete(entity);
+		return result;
 	}
 }

@@ -4,8 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.project.bo.BusBO;
+import com.webservice.bean.Bus;
 import com.webservice.dao.impl.BusDAOImpl;
-import com.webservice.model.Bus;
 
 public class BusBOImpl  implements BusBO{
 	BusDAOImpl dao = new BusDAOImpl();
@@ -17,7 +17,9 @@ public class BusBOImpl  implements BusBO{
 		this.dao = dao;
 	}
 
+	@Override
 	public List<Bus> getAll() throws Exception {
+		// TODO Auto-generated method stub
 		List<Bus> list = new ArrayList<Bus>();
 		List<Bus> l = dao.getAll();
 		for(int i = 0; i < l.size(); i++) {
@@ -28,25 +30,40 @@ public class BusBOImpl  implements BusBO{
 		return list;
 	}
 
+	@Override
 	public Bus getById(String id) throws Exception {
-		Bus u = new Bus();
-		u = dao.getById(id);
-		return u;
-	}
-
-	public void addNew(Bus entity) throws Exception {
-		dao.addNew(entity);
-	}
-
-	public void update(Bus entity) throws Exception {
-		try {
-			dao.update(entity);
-		} catch (Exception ex) {
-			throw new Exception("Display error: " + ex.getMessage());
+		// TODO Auto-generated method stub
+		List<Bus> list = dao.getAll();
+		Bus bus = new Bus();
+		for(Bus b: list){
+			if(b.getBusNumber().toString().compareTo(id) == 0){
+				bus = b;
+			}
 		}
+		return bus;
 	}
 
-	public void delete(Bus entity) throws Exception {
-		dao.delete(entity);
+	@Override
+	public int addNew(Bus entity) throws Exception {
+		// TODO Auto-generated method stub
+		int result = 0;
+		result = dao.addNew(entity);
+		return result;
+	}
+
+	@Override
+	public int update(Bus entity) throws Exception {
+		// TODO Auto-generated method stub
+		int result = 0;
+		result = dao.update(entity);
+		return result;
+	}
+
+	@Override
+	public int delete(Bus entity) throws Exception {
+		// TODO Auto-generated method stub
+		int result = 0;
+		result = dao.delete(entity);
+		return result;
 	}
 }

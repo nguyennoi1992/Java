@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE tiles-definitions PUBLIC
+   "-//Apache Software Foundation//DTD Tiles Configuration 2.0//EN"
+   "http://tiles.apache.org/dtds/tiles-config_2_0.dtd">
+
+<tiles-definitions>
+
+	<definition name="baseLayout" template="/baseLayout.jsp">
+		<put-attribute name="banner" value="/banner.jsp" />
+		<put-attribute name="menu" value="/menu.jsp" />
+		<put-attribute name="body" value="/body.jsp" />
+		<put-attribute name="footer" value="/footer.jsp" />
+	</definition>
+
+
+	<definition name="customer" extends="baseLayout">
+		<put-attribute name="body" value="/customer.jsp" />
+	</definition>
+
+	<definition name="kind" extends="baseLayout">
+		<put-attribute name="body" value="/kind.jsp" />
+	</definition>
+
+	<definition name="bus" extends="baseLayout">
+		<put-attribute name="body" value="/bus.jsp" />
+	</definition>
+
+	<definition name="payment" extends="baseLayout">
+		<put-attribute name="body" value="/payment.jsp" />
+	</definition>
+
+	<definition name="addCustomer" extends="baseLayout">
+		<put-attribute name="body" value="/addCustomer.jsp" />
+	</definition>
+
+	<definition name="addBus" extends="baseLayout">
+		<put-attribute name="body" value="/addBus.jsp" />
+	</definition>
+
+	<definition name="addKind" extends="baseLayout">
+		<put-attribute name="body" value="/addKind.jsp" />
+	</definition>
+
+	<definition name="detailsCustomer" extends="baseLayout">
+		<put-attribute name="body" value="/customerDetails.jsp" />
+	</definition>
+
+	<definition name="detailsKind" extends="baseLayout">
+		<put-attribute name="body" value="/kindDetails.jsp" />
+	</definition>
+	<definition name="detailsBus" extends="baseLayout">
+		<put-attribute name="body" value="/busDetails.jsp" />
+	</definition>
+
+	<definition name="customerImage" extends="baseLayout">
+		<put-attribute name="body" value="/userImage.jsp" />
+	</definition>
+
+	<definition name="account" extends="baseLayout">
+		<put-attribute name="body" value="/account.jsp" />
+	</definition>
+
+	<definition name="addAccount" extends="baseLayout">
+		<put-attribute name="body" value="/addAccount.jsp" />
+	</definition>
+
+	<definition name="employee" extends="baseLayout">
+		<put-attribute name="body" value="/employee.jsp" />
+	</definition>
+
+	<definition name="addEmployee" extends="baseLayout">
+		<put-attribute name="body" value="/addEmployee.jsp" />
+	</definition>
+
+	<definition name="detailsEmployee" extends="baseLayout">
+		<put-attribute name="body" value="/employeeDetails.jsp" />
+	</definition>
+</tiles-definitions>

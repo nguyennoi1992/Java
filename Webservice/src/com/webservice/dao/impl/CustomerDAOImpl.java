@@ -7,12 +7,15 @@ import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
+import com.webservice.bean.Customer;
 import com.webservice.dao.CustomerDAO;
 import com.webservice.db.HibernateUtil;
-import com.webservice.model.Customer;
 
 public class CustomerDAOImpl implements CustomerDAO<Customer>{
+
+	@Override
 	public List<Customer> getAll() throws Exception {
+		// TODO Auto-generated method stub
 		String query = "SELECT * FROM Customers";
 		Session session = HibernateUtil.getSessionFactory().openSession();
 		Transaction transaction = null;
@@ -20,26 +23,26 @@ public class CustomerDAOImpl implements CustomerDAO<Customer>{
 		try {
 			transaction = session.beginTransaction();
 			for(Object[] row:(List<Object[]>) session.createSQLQuery(query).list()) {
-				float number1 = Float.parseFloat(row[10].toString());
-				int number2 = Integer.parseInt(row[12].toString());
+				float number1 = Float.parseFloat(row[11].toString());
+				int number2 = Integer.parseInt(row[13].toString());
 				String dateLimit = "";
-				if(row[5] != null) {
-					dateLimit = row[5].toString();					 
+				if(row[6] != null) {
+					dateLimit = row[6].toString();					 
 				} 
 				list.add(new Customer(row[0].toString(),
 						row[1].toString(),
 						row[2].toString(),
 						row[3].toString(),
 						row[4].toString(),
+						row[5].toString(),
 						dateLimit,
-						row[6].toString(),
 						row[7].toString(),
 						row[8].toString(),
 						row[9].toString(),
+						row[10].toString(),
 						number1,
-						row[11].toString(),
+						row[12].toString(),
 						number2,
-						row[13].toString(),
 						row[14].toString()));
 			}
 			transaction.commit();
@@ -51,92 +54,66 @@ public class CustomerDAOImpl implements CustomerDAO<Customer>{
 		}
 		return list;	
 	}
-	public Customer getById(String id) throws Exception {
-		String query = "SELECT * FROM Customers WHERE customerNumber = '" + id + "'";
-		Customer customer = new Customer();
 
+	@Override
+	public int addNew(Customer entity) throws Exception {
+		// TODO Auto-generated method stub
 		Session session = HibernateUtil.getSessionFactory().openSession();
-		Transaction transaction = null;
-		try {
-			transaction = session.beginTransaction();
-			for(Object[] row:(List<Object[]>) session.createSQLQuery(query).list()) {
-				float number1 = Float.parseFloat(row[10].toString());
-				int number2 = Integer.parseInt(row[12].toString());
-				String dateLimit = "";
-				if(row[5] != null) {
-					dateLimit = row[5].toString();					 
-				} 
-				customer = new Customer(row[0].toString(),
-						row[1].toString(),
-						row[2].toString(),
-						row[3].toString(),
-						row[4].toString(),
-						dateLimit,
-						row[6].toString(),
-						row[7].toString(),
-						row[8].toString(),
-						row[9].toString(),
-						number1,
-						row[11].toString(),
-						number2,
-						row[13].toString(),
-						row[14].toString());
-			}
-			transaction.commit();
-		} catch (HibernateException e) {
-			transaction.rollback();
-			e.printStackTrace();
-		} finally {
-			session.close();
-		}
-		return customer;
-
-	}
-	public void addNew(Customer entity) throws Exception {
-		Session session = HibernateUtil.getSessionFactory().openSession();
+		int result = 0;
 		Transaction transaction = null;
 		try {
 			transaction = session.beginTransaction();
 			session.save(entity);
 			transaction.commit();
+			result = 1;
 		} catch (HibernateException e) {
 			transaction.rollback();
 			e.printStackTrace();
 		} finally {
 			session.close();
 		}
-
+		return result;
 	}
-	public void update(Customer entity) throws Exception {
+
+	@Override
+	public int update(Customer entity) throws Exception {
+		// TODO Auto-generated method stub
 		Session session = HibernateUtil.getSessionFactory().openSession();
+		int result = 0;
 		Transaction transaction = null;
 		try {
 			transaction = session.beginTransaction();
 			session.update(entity);
 			transaction.commit();
+			result = 1;
 		} catch (HibernateException e) {
 			transaction.rollback();
 			e.printStackTrace();
 		} finally {
 			session.close();
 		}
-
+		return result;
 
 	}
-	public void delete(Customer entity) throws Exception {
+
+	@Override
+	public int delete(Customer entity) throws Exception {
+		// TODO Auto-generated method stub
 		Session session = HibernateUtil.getSessionFactory().openSession();
+		int result = 0;
 		Transaction transaction = null;
 		try {
 			transaction = session.beginTransaction();
 			session.delete(entity);
 			transaction.commit();
+			result = 1;
 		} catch (HibernateException e) {
 			transaction.rollback();
 			e.printStackTrace();
 		} finally {
 			session.close();
 		}
-
+		return result;
 
 	}
 }

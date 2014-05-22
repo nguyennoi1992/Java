@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="com.management.bean.Employee" table="Employee">
+		<id name="employeeNumber" column="EmployeeNumber" type="string">
+			<!-- <generator class="native" /> -->
+		</id>
+
+		<property name="firstName" column="FirstName" type="string" />
+		<property name="lastName" column="LastName" type="string" />
+		<property name="sex" column="Sex" type="string" />
+		<property name="dateOfBirth" column="DateOfBirth" type="string" />
+		<property name="image" column="Image" type="string" />
+		<property name="address" column="Address" type="string" />
+		<property name="phoneNumber" column="PhoneNumber" type="string" />
+		<property name="position" column="Position" type="string" />
+		<property name="actived" column="Actived" type="string" />
+	</class>
+</hibernate-mapping>

@@ -2,7 +2,7 @@
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
 <hibernate-mapping>
-	<class name="com.webservice.model.User" table="Users">
+	<class name="com.webservice.bean.User" table="Users">
 		<id name="userNumber" column="UserNumber" type="string">
 			<generator class="native" />
 		</id>
@@ -10,9 +10,9 @@
 		<property name="username" column="Username" type="string" />
 		<property name="password" column="Password" type="string" />
 		<property name="email" column="Email" type="string" />
-		<property name="busNumber" column="BusNumber" type="string" />
-		
-<!-- 		<many-to-one name="busNumber" column="BusNumber" unique="true"
-			class="com.webservice.model.Bus" not-null="true" /> -->
+		<property name="account" column="Account" type="string" />
+
+		<!-- <many-to-one name="busNumber" column="BusNumber" unique="true" class="com.webservice.bean.Bus" 
+			not-null="true" /> -->
 	</class>
 </hibernate-mapping>

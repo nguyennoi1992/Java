@@ -4,13 +4,15 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.project.bo.UserBO;
+import com.webservice.bean.User;
 import com.webservice.dao.impl.UserDAOImpl;
-import com.webservice.model.User;
 
 public class UserBOImpl implements UserBO{
 	private UserDAOImpl dao = new UserDAOImpl();
 
+	@Override
 	public List<User> getAll() throws Exception {
+		// TODO Auto-generated method stub
 		List<User> list = new ArrayList<User>();
 		List<User> l = dao.getAll();
 		for(int i = 0; i < l.size(); i++) {
@@ -18,33 +20,59 @@ public class UserBOImpl implements UserBO{
 					l.get(i).getUsername(),
 					l.get(i).getPassword(),
 					l.get(i).getEmail(),
-					l.get(i).getBusNumber()));
+					l.get(i).getAccount()));
 		}
 		return list;
 	}
 
+	@Override
 	public User getById(String id) throws Exception {
-		User u = new User();
-		u = dao.getById(id);
-		return u;
+		// TODO Auto-generated method stub
+		List<User> list = dao.getAll();
+		User user = new User();
+		for(User u: list){
+			if(u.getUserNumber().toString().compareTo(id) == 0){
+				user = u;
+			}
+		}
+		return user;
 	}
 
+	@Override
 	public User getNamePassword(String name, String password) throws Exception {
-		User u = new User();
-		u = dao.getNamePassword(name, password);
-		return u;
+		// TODO Auto-generated method stub
+		List <User> list = dao.getAll();
+		User user = new User();
+		for(User u: list){
+			if(u.getUsername().toString().compareTo(name) == 0 &&
+					u.getPassword().toString().compareTo(password) == 0){
+				user = u;
+			}
+		}
+		return user;
 	}
 
-
-	public void addNew(User entity) throws Exception {
-		dao.addNew(entity);
+	@Override
+	public int addNew(User entity) throws Exception {
+		// TODO Auto-generated method stub
+		int result = 0;
+		result = dao.addNew(entity);
+		return result;
 	}
 
-	public void update(User entity) throws Exception {
-		dao.update(entity);
+	@Override
+	public int update(User entity) throws Exception {
+		// TODO Auto-generated method stub
+		int result = 0;
+		result = dao.update(entity);
+		return result;
 	}
 
-	public void delete(User entity) throws Exception {
-		dao.delete(entity);
+	@Override
+	public int delete(User entity) throws Exception {
+		// TODO Auto-generated method stub
+		int result = 0;
+		result = dao.delete(entity);
+		return result;
 	}
 }

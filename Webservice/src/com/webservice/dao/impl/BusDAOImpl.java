@@ -7,12 +7,14 @@ import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
+import com.webservice.bean.Bus;
 import com.webservice.dao.BusDAO;
 import com.webservice.db.HibernateUtil;
-import com.webservice.model.Bus;
 
 public class BusDAOImpl implements BusDAO<Bus>{
+	@Override
 	public List<Bus> getAll() throws Exception {
+		// TODO Auto-generated method stub
 		String query = "SELECT * FROM Bus";
 		Session session = HibernateUtil.getSessionFactory().openSession();
 		Transaction transaction = null;
@@ -38,71 +40,59 @@ public class BusDAOImpl implements BusDAO<Bus>{
 		System.out.println(list.size());
 		return list;	
 	}
-	public Bus getById(String id) throws Exception {
-		String query = "SELECT * FROM Bus WHERE busNumber = '" + id + "'";
-		Bus bus = new Bus();
 
+	@Override
+	public int addNew(Bus entity) throws Exception {
+		// TODO Auto-generated method stub
 		Session session = HibernateUtil.getSessionFactory().openSession();
-		Transaction transaction = null;
-		try {
-			transaction = session.beginTransaction();
-			for(Object[] row:(List<Object[]>) session.createSQLQuery(query).list()) {
-				float number = (float) 0.0;
-				if(row[2] != null) {
-					number = Float.parseFloat(row[2].toString());
-				}
-				bus = new Bus(row[0].toString(),
-						row[1].toString(), 
-						number);
-			}
-			transaction.commit();
-		} catch (HibernateException e) {
-			transaction.rollback();
-			e.printStackTrace();
-		} finally {
-			session.close();
-		}
-		return bus;
-
-	}
-	public void addNew(Bus entity) throws Exception {
-		Session session = HibernateUtil.getSessionFactory().openSession();
+		int result = 0;
 		Transaction transaction = null;
 		try {
 			transaction = session.beginTransaction();
 			session.save(entity);
 			transaction.commit();
+			result = 1;
 		} catch (HibernateException e) {
 			transaction.rollback();
 			e.printStackTrace();
 		} finally {
 			session.close();
 		}
-
+		return result;
 	}
-	public void update(Bus entity) throws Exception {
+
+	@Override
+	public int update(Bus entity) throws Exception {
+		// TODO Auto-generated method stub
 		Session session = HibernateUtil.getSessionFactory().openSession();
+		int result = 0;
 		Transaction transaction = null;
 		try {
 			transaction = session.beginTransaction();
 			session.update(entity);
 			transaction.commit();
+			result = 1;
 		} catch (HibernateException e) {
 			transaction.rollback();
 			e.printStackTrace();
 		} finally {
 			session.close();
 		}
-
+		return result;
 
 	}
-	public void delete(Bus entity) throws Exception {
+
+	@Override
+	public int delete(Bus entity) throws Exception {
+		// TODO Auto-generated method stub
 		Session session = HibernateUtil.getSessionFactory().openSession();
+		int result = 0;
 		Transaction transaction = null;
 		try {
 			transaction = session.beginTransaction();
 			session.delete(entity);
 			transaction.commit();
+			result = 1;
 		} catch (HibernateException e) {
 			transaction.rollback();
 			e.printStackTrace();
@@ -110,6 +100,6 @@ public class BusDAOImpl implements BusDAO<Bus>{
 			session.close();
 		}
 
-
+		return result;
 	}
 }

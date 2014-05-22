@@ -7,12 +7,14 @@ import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
+import com.webservice.bean.Kind;
 import com.webservice.dao.KindDAO;
 import com.webservice.db.HibernateUtil;
-import com.webservice.model.Kind;
 
 public class KindDAOImpl implements KindDAO<Kind>{
+	@Override
 	public List<Kind> getAll() throws Exception {
+		// TODO Auto-generated method stub
 		String query = "SELECT * FROM Kind";
 		Session session = HibernateUtil.getSessionFactory().openSession();
 		Transaction transaction = null;
@@ -35,54 +37,38 @@ public class KindDAOImpl implements KindDAO<Kind>{
 		}
 		return list;	
 	}
-	public Kind getById(int id) throws Exception {
-		String query = "SELECT * FROM Kind WHERE kindNumber = " + id + "";
-		Kind kind = new Kind();
 
+	@Override
+	public int addNew(Kind entity) throws Exception {
+		// TODO Auto-generated method stub
 		Session session = HibernateUtil.getSessionFactory().openSession();
-		Transaction transaction = null;
-		List<Kind> list = new ArrayList<Kind>();
-		try {
-			transaction = session.beginTransaction();
-			for(Object[] row:(List<Object[]>) session.createSQLQuery(query).list()) {
-				int number = Integer.parseInt(row[0].toString());
-				kind = new Kind(number,
-						row[1].toString(), 
-						row[2].toString(), 
-						row[3].toString());
-			}
-			transaction.commit();
-		} catch (HibernateException e) {
-			transaction.rollback();
-			e.printStackTrace();
-		} finally {
-			session.close();
-		}
-		return kind;
-
-	}
-	public void addNew(Kind entity) throws Exception {
-		Session session = HibernateUtil.getSessionFactory().openSession();
+		int result = 0;
 		Transaction transaction = null;
 		try {
 			transaction = session.beginTransaction();
 			session.save(entity);
 			transaction.commit();
+			result = 1;
 		} catch (HibernateException e) {
 			transaction.rollback();
 			e.printStackTrace();
 		} finally {
 			session.close();
 		}
-
+		return result;
 	}
-	public void update(Kind entity) throws Exception {
+
+	@Override
+	public int update(Kind entity) throws Exception {
+		// TODO Auto-generated method stub
 		Session session = HibernateUtil.getSessionFactory().openSession();
+		int result = 0;
 		Transaction transaction = null;
 		try {
 			transaction = session.beginTransaction();
 			session.update(entity);
 			transaction.commit();
+			result = 1;
 		} catch (HibernateException e) {
 			transaction.rollback();
 			e.printStackTrace();
@@ -90,15 +76,20 @@ public class KindDAOImpl implements KindDAO<Kind>{
 			session.close();
 		}
 
-
+		return result;
 	}
-	public void delete(Kind entity) throws Exception {
+
+	@Override
+	public int delete(Kind entity) throws Exception {
+		// TODO Auto-generated method stub
 		Session session = HibernateUtil.getSessionFactory().openSession();
+		int result = 0;
 		Transaction transaction = null;
 		try {
 			transaction = session.beginTransaction();
 			session.delete(entity);
 			transaction.commit();
+			result = 1;
 		} catch (HibernateException e) {
 			transaction.rollback();
 			e.printStackTrace();
@@ -106,6 +97,6 @@ public class KindDAOImpl implements KindDAO<Kind>{
 			session.close();
 		}
 
-
+		return result;
 	}
 }

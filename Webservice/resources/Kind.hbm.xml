@@ -2,19 +2,16 @@
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
 <hibernate-mapping>
-	<class name="com.webservice.model.Kind" table="Kind">
+	<class name="com.webservice.bean.Kind" table="Kind">
 		<id name="kindNumber" column="KindNumber" type="integer">
 			<generator class="native" />
 		</id>
 		<property name="kind" column="Kind" type="string" />
 		<property name="type" column="Type" type="string" />
 		<property name="category" column="Category" type="string" />
-		
-<!-- 		<set name="kindNumber" inverse="true" cascade="all">
-            <key>
-                <column name="KindNumber" not-null="true" />
-            </key>
-            <one-to-many class="com.webservice.model.Customer" />
-        </set> -->
+
+		<!-- <set name="kindNumber" inverse="true" cascade="all"> <key> <column 
+			name="KindNumber" not-null="true" /> </key> <one-to-many class="com.webservice.bean.Customer" 
+			/> </set> -->
 	</class>
 </hibernate-mapping>

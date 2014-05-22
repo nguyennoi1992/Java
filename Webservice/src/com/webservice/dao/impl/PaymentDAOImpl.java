@@ -7,12 +7,14 @@ import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
+import com.webservice.bean.Payment;
 import com.webservice.dao.PaymentDAO;
 import com.webservice.db.HibernateUtil;
-import com.webservice.model.Payment;
 
 public class PaymentDAOImpl implements PaymentDAO<Payment>{
+	@Override
 	public List<Payment> getAll() throws Exception {
+		// TODO Auto-generated method stub
 		String query = "SELECT * FROM Payment";
 		Session session = HibernateUtil.getSessionFactory().openSession();
 		Transaction transaction = null;
@@ -25,6 +27,7 @@ public class PaymentDAOImpl implements PaymentDAO<Payment>{
 						row[1].toString(), 
 						row[2].toString(), 
 						row[3].toString(), 
+						row[4].toString(),
 						row[4].toString()));
 			}            
 			transaction.commit();
@@ -36,33 +39,9 @@ public class PaymentDAOImpl implements PaymentDAO<Payment>{
 		}
 		return list;	
 	}
-	public Payment getById(int id) throws Exception {
-		String query = "SELECT * FROM Payment WHERE paymentNumber = " + id + "";
-		Payment payment = new Payment();
-
-		Session session = HibernateUtil.getSessionFactory().openSession();
-		Transaction transaction = null;
-		try {
-			transaction = session.beginTransaction();
-			for(Object[] row:(List<Object[]>) session.createSQLQuery(query).list()) {
-				int number = Integer.parseInt(row[0].toString());
-				payment = new Payment(number,
-						row[1].toString(), 
-						row[2].toString(), 
-						row[3].toString(), 
-						row[4].toString());
-			}  
-			transaction.commit();
-		} catch (HibernateException e) {
-			transaction.rollback();
-			e.printStackTrace();
-		} finally {
-			session.close();
-		}
-		return payment;
-
-	}
+	@Override
 	public int addNew(Payment entity) throws Exception {
+		// TODO Auto-generated method stub
 		Session session = HibernateUtil.getSessionFactory().openSession();
 		int result = 0;
 		Transaction transaction = null;
@@ -79,13 +58,18 @@ public class PaymentDAOImpl implements PaymentDAO<Payment>{
 		}
 		return result;
 	}
-	public void update(Payment entity) throws Exception {
+
+	@Override
+	public int update(Payment entity) throws Exception {
+		// TODO Auto-generated method stub
 		Session session = HibernateUtil.getSessionFactory().openSession();
+		int result = 0;
 		Transaction transaction = null;
 		try {
 			transaction = session.beginTransaction();
 			session.update(entity);
 			transaction.commit();
+			result = 1;
 		} catch (HibernateException e) {
 			transaction.rollback();
 			e.printStackTrace();
@@ -94,21 +78,27 @@ public class PaymentDAOImpl implements PaymentDAO<Payment>{
 		}
 
 
+		return result;
 	}
-	public void delete(Payment entity) throws Exception {
+
+	@Override
+	public int delete(Payment entity) throws Exception {
+		// TODO Auto-generated method stub
 		Session session = HibernateUtil.getSessionFactory().openSession();
+		int result = 0;
 		Transaction transaction = null;
 		try {
 			transaction = session.beginTransaction();
 			session.delete(entity);
 			transaction.commit();
+			result = 1;
 		} catch (HibernateException e) {
 			transaction.rollback();
 			e.printStackTrace();
 		} finally {
 			session.close();
 		}
-
+		return result;
 
 	}
 }
