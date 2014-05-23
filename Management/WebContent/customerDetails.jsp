@@ -12,8 +12,7 @@
 </head>
 <body>
 	<h1 align="center">Chi tiết</h1>
-	<s:form action="updateCustomer" method="post" id="viewCustomer"
-		accept-charset="utf-8">
+	<s:form action="updateCustomer" method="post" accept-charset="utf-8">
 		<s:hidden name="customer.customerNumber"></s:hidden>
 		<s:hidden name="customer.image"></s:hidden>
 		<table width="100%" align="center">
@@ -30,46 +29,71 @@
 				<td width="20%"></td>
 			</tr>
 			<tr>
-				<td width="20%">Mã nhân viên:</td>
-				<td width="20%"><s:textfield name="employee.employeeNumber"
-						theme="simple"></s:textfield></td>
+				<td width="20%">Mã người dùng:</td>
+				<td width="20%"><s:textfield name="customer.customerNumber"
+						theme="simple" disabled="true" ></s:textfield></td>
 				<td width="10%"></td>
-				<td width="20%">Số điện thoại:</td>
-				<td width="20%"><s:textfield name="employee.phoneNumber"
+				<td width="20%">Địa chỉ:</td>
+				<td width="20%"><s:textfield name="customer.address"
 						theme="simple"></s:textfield></td>
 			</tr>
 			<tr>
 				<td>Họ:</td>
-				<td><s:textfield name="employee.firstName" theme="simple"></s:textfield>
+				<td><s:textfield name="customer.firstName" theme="simple"></s:textfield>
 				</td>
 				<td></td>
-				<td width="20%">Địa chỉ:</td>
-				<td width="20%"><s:textfield name="employee.address"
+				<td width="20%">Trường/Công ty:</td>
+				<td width="20%"><s:textfield name="customer.schoolOrCompany"
 						theme="simple"></s:textfield></td>
 			</tr>
 			<tr>
 				<td>Tên:</td>
-				<td><s:textfield name="employee.lastName" theme="simple"></s:textfield>
+				<td><s:textfield name="customer.lastName" theme="simple"></s:textfield>
 				</td>
 				<td></td>
-				<td>vị trí:</td>
-				<td><s:textfield name="employee.position" theme="simple"></s:textfield>
+				<td>Nghề nghiệp:</td>
+				<td><s:textfield name="customer.job" theme="simple"></s:textfield>
 				</td>
 			</tr>
 			<tr>
 				<td>Ngày sinh:</td>
-				<td><s:textfield name="employee.dateOfBirth" theme="simple"></s:textfield>
+				<td><s:textfield name="customer.dateOfBirth" theme="simple"></s:textfield>
 				</td>
 				<td></td>
-				<td>Kích hoạt:</td>
-				<td><s:select headerKey="-1" headerValue="--Lựa chọn--"
-						list="listActived" name="employee.actived" theme="simple"></s:select></td>
+				<td>Số dư tài khoản:</td>
+				<td><s:textfield name="customer.balance"
+						value="%{customer.balance}" theme="simple"></s:textfield></td>
 			</tr>
 			<tr>
 				<td>Giới tính:</td>
 				<td><s:select headerKey="-1" headerValue="--Lựa chọn--"
-						list="listSex" name="employee.sex" theme="simple"></s:select></td>
+						list="listSex" name="customer.sex" theme="simple"></s:select></td>
 				<td></td>
+				<td>Nơi đăng ký:</td>
+				<td><s:textfield name="customer.placeEnroll" theme="simple"></s:textfield>
+				</td>
+			</tr>
+
+			<tr>
+				<td>Ngày hết hạn:</td>
+				<td><s:textfield name="customer.dateLimit" theme="simple"></s:textfield>
+				</td>
+				<td></td>
+				<td>Loại thẻ:</td>
+				<td><s:select headerKey="-1" headerValue="--Loại thẻ--"
+						list="listKind" listKey="kindNumber"
+						value="%{customer.kindNumber}" listValue="kindNumber"
+						name="customer.kindNumber" theme="simple"></s:select></td>
+			</tr>
+			<tr>
+				<td>Số điện thoại:</td>
+				<td><s:textfield name="customer.phoneNumber" theme="simple"></s:textfield>
+				</td>
+				<td></td>
+				<td>Kích hoạt:</td>
+				<td><s:select headerKey="-1" headerValue="--Lựa chọn--"
+						list="listActived" name="customer.actived" theme="simple"></s:select></td>
+
 			</tr>
 		</table>
 		<span style="float: center;"> <s:submit name="update"

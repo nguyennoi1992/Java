@@ -41,9 +41,15 @@ public class PaymentAction extends ActionSupport implements ProjectConstants {
 	public PaymentAction() {
 		super();
 		// TODO Auto-generated constructor stub
-		if(account.compareTo("Manager") == 0) {
+		if(account.compareTo("Manager") == 0){
 			try {
-				totalPage = paymentBO.getAll().size() / STATIC_ROW_MAX + 1;
+				int total = paymentBO.getAll().size();
+				int div = total / STATIC_ROW_MAX;
+				if(div * STATIC_ROW_MAX == total) {
+					totalPage = div;
+				} else {
+					totalPage = div + 1;
+				}
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -55,11 +61,16 @@ public class PaymentAction extends ActionSupport implements ProjectConstants {
 			try {
 				l = paymentBO.getAll();
 				for(Payment p: l) {
-					if(p.getEmployeeName().compareTo(userNumber) == 0) {
+					if(p.getUserNumber().compareTo(userNumber) == 0) {
 						total++;
 					}
 				}
-				totalPage = total / STATIC_ROW_MAX + 1;
+				int div = total / STATIC_ROW_MAX;
+				if(div * STATIC_ROW_MAX == total) {
+					totalPage = div;
+				} else {
+					totalPage = div + 1;
+				}
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -75,20 +86,25 @@ public class PaymentAction extends ActionSupport implements ProjectConstants {
 						total++;
 					}
 				}
-				totalPage = total / STATIC_ROW_MAX + 1;
+				int div = total / STATIC_ROW_MAX;
+				if(div * STATIC_ROW_MAX == total) {
+					totalPage = div;
+				} else {
+					totalPage = div + 1;
+				}
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		}
-	}
 
+	}
 	/**
 	 * Ham nay thuc hien get list 
 	 * @return
 	 */
 	public String list(){
-		if(account.compareTo("Manager") == 0) {
+		if(account.compareTo("Manager") == 0){
 			try {
 				list = paymentBO.getAll();
 			} catch (Exception e) {
@@ -148,14 +164,12 @@ public class PaymentAction extends ActionSupport implements ProjectConstants {
 		return "list";
 	}
 	public String delete() {
-		if(account.compareTo("User") != 0) {
-			try {
-				payment = paymentBO.getById(paymentID);
-				paymentBO.delete(payment);
-			} catch (Exception e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
+		try {
+			payment = paymentBO.getById(paymentID);
+			paymentBO.delete(payment);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 		list();
 		return "delete";

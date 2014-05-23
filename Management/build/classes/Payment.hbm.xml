@@ -10,6 +10,7 @@
 		<property name="place" column="Place" type="string" />
 		<property name="customerNumber" column="CustomerNumber" type="string" />
 		<property name="userNumber" column="UserNumber" type="string" />
+		<property name="numberPlate" column="NumberPlate" type="string" />
 
 		<!-- <many-to-one name="customerNumber" column="CustomerNumber" unique="true" 
 			class="com.webservice.bean.Customer" not-null="true" cascade="all" /> <many-to-one 

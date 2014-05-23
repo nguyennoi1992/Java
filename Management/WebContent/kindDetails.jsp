@@ -11,7 +11,8 @@
 </head>
 <body>
 	<h1 align="center">Chi tiết</h1>
-	<s:form action="createKind" method="post" id="viewCustomer">
+	<s:form action="updateKind" method="post" id="viewCustomer">
+		<s:hidden name="kind.kindNumber" ></s:hidden>
 		<table width="100%" align="center"
 			style="border: hidden; background-color: #F3F1EB;">
 			<tr style="border: hidden; background-color: #F3F1EB;">
@@ -32,7 +33,7 @@
 				</td>
 			</tr>
 		</table>
-		<span style="float: center;"> <s:submit name="create"
+		<span style="float: center;"> <s:submit name="update"
 				value="Lưu" align="center"></s:submit></span>
 	</s:form>
 </body>

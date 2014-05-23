@@ -26,8 +26,9 @@ public class PaymentDAOImpl implements PaymentDAO<Payment>{
 				list.add(new Payment(number,
 						row[1].toString(), 
 						row[2].toString(), 
-						row[3].toString(), 
-						row[4].toString()));
+						row[3].toString(),
+						row[4].toString(),
+						row[5].toString()));
 			}            
 			transaction.commit();
 		} catch (HibernateException e) {

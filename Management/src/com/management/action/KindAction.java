@@ -35,7 +35,13 @@ public class KindAction extends ActionSupport implements ProjectConstants {
 		super();
 		// TODO Auto-generated constructor stub
 		try {
-			totalPage = kindBO.getAll().size() / STATIC_ROW_MAX + 1;
+			int total = kindBO.getAll().size();
+			int div = total / STATIC_ROW_MAX;
+			if(div * STATIC_ROW_MAX == total) {
+				totalPage = div;
+			} else {
+				totalPage = div + 1;
+			}
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -90,17 +96,14 @@ public class KindAction extends ActionSupport implements ProjectConstants {
 	}
 
 	public String update(){
-		if(account.compareTo("User") != 0) {
-			utf8Kind();
-			try {
-				kindBO.update(kind);
-				listKind = kindBO.getAll();
-			} catch (Exception e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
+		utf8Kind();
+		try {
+			kindBO.update(kind);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
-		return "update";
+		return list();
 	}
 	public String delete() {
 		if(account.compareTo("User") != 0) {

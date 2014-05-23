@@ -20,21 +20,7 @@
 		<property name="balance" column="Balance" type="float" />
 		<property name="placeEnroll" column="PlaceEnroll" type="string" />
 
-
-<!-- 		<many-to-one name="kindNumber" column="KindNumber" unique="true"
-			class="com.webservice.bean.Kind" not-null="true" />
-		<many-to-one name="busNumber" column="BusNumber" unique="true"
-			class="com.webservice.bean.Bus" not-null="true" />
- -->
-
 		<property name="kindNumber" column="KindNumber" type="int" />
 		<property name="actived" column="Actived" type="string" />
-
-<!-- 		<set name="customerNumber" inverse="true" cascade="all">
-			<key>
-				<column name="CustomerNumber" not-null="true" />
-			</key>
-			<one-to-many class="com.webservice.bean.Payment" />
-		</set> -->
 	</class>
 </hibernate-mapping>

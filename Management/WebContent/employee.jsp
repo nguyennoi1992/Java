@@ -12,10 +12,14 @@
 </head>
 <body>
 	<h1 align="center">Bảng thông tin nhân viên</h1>
-	<s:if test="#session.account == 'Manager'">
-		<span style="float: right;"> <a
-			href="<s:url action="addEmployee"/>">Thêm nhân viên</a></span>
-	</s:if>
+	<span style="float: right;"> <a
+		href="<s:url action="addEmployee"/>">Thêm nhân viên</a></span>
+			<s:form action="listEmployee" method="post">
+		<s:textfield name="name" theme="simple">Tìm kiếm theo tên: </s:textfield>
+		<span style="float: center;"> <s:submit name="search"
+				value="Tìm kiếm" align="left"></s:submit></span>
+	</s:form>
+		
 	<table width="100%"
 		class="table table-striped table-bordered table-hover">
 		<thead>
@@ -47,15 +51,10 @@
 					<td><s:property value="#em.phoneNumber" /></td>
 					<td><s:property value="#em.address" /></td>
 					<td><s:property value="#em.position" /></td>
-					<s:if test="#session.account == 'Manager'">
-						<td><a
-							href="activeEmployee.action?employeeID=<s:property value="#em.employeeNumber" />&pageIndex=<s:property value="pageIndex"/>">
-								<s:property value="#em.Actived" />
-						</a></td>
-					</s:if>
-					<s:if test="#session.account == 'User'">
-						<td><s:property value="#cus.Actived" /></td>
-					</s:if>
+					<td><a
+						href="activeEmployee.action?employeeID=<s:property value="#em.employeeNumber" />&pageIndex=<s:property value="pageIndex"/>">
+							<s:property value="#em.Actived" />
+					</a></td>
 				</tr>
 			</s:iterator>
 		</tbody>

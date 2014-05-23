@@ -12,7 +12,7 @@
 <body>
 	<h1 align="center">Thêm loại thẻ mới</h1>
 	<s:form action="createKind" method="post" id="viewCustomer"
-		acceptcharset="utf-8">
+		accept-charset="utf-8">
 		<table width="100%" align="center"
 			style="border: hidden; background-color: #F3F1EB;">
 			<tr style="border: hidden; background-color: #F3F1EB;">

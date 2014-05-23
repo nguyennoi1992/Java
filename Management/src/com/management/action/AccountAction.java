@@ -40,26 +40,26 @@ public class AccountAction extends ActionSupport implements ProjectConstants{
 	public AccountAction() {
 		super();
 		// TODO Auto-generated constructor stub
-		System.out.println("Account " + account);
-		if(account.compareTo("Manager") == 0) {
-			try {
-				totalPage = userBO.getAll().size() / STATIC_ROW_MAX;
-			} catch (Exception e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+		try {
+			int total = userBO.getAll().size();
+			int div = total / STATIC_ROW_MAX;
+			if(div * STATIC_ROW_MAX == total) {
+				totalPage = div;
+			} else {
+				totalPage = div + 1;
 			}
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
-		System.out.println("totalPage " + totalPage);
 	}
 
 	public String list() {
-		if(account.compareTo("Manager") == 0 ){
-			try {
-				list = userBO.getAll();
-			} catch (Exception e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
+		try {
+			list = userBO.getAll();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 
 		int index = 0, begin = 0;
@@ -76,54 +76,47 @@ public class AccountAction extends ActionSupport implements ProjectConstants{
 	}
 
 	public String add(){
-		if(account.compareTo("Manager") == 0) {
-			List<Customer> listCustomer = new ArrayList<Customer>();
-			try {
-				listCustomer = customerBO.getAll();
-				list = userBO.getAll();
-				for(Customer cus: listCustomer) {
-					int check = 0;
-					for(User us: list) {
-						if(cus.getCustomerNumber().compareTo(us.getUserNumber()) == 0) {
-							check = 1;
-							break;
-						}
-					}
-					if(check == 0) {
-						listID.add(cus.getCustomerNumber());
+		List<Customer> listCustomer = new ArrayList<Customer>();
+		try {
+			listCustomer = customerBO.getAll();
+			list = userBO.getAll();
+			for(Customer cus: listCustomer) {
+				int check = 0;
+				for(User us: list) {
+					if(cus.getCustomerNumber().compareTo(us.getUserNumber()) == 0) {
+						check = 1;
+						break;
 					}
 				}
-			} catch (Exception e1) {
-				// TODO Auto-generated catch block
-				e1.printStackTrace();
+				if(check == 0) {
+					listID.add(cus.getCustomerNumber());
+				}
 			}
+		} catch (Exception e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
 		}
 		return "add";
 	}
 
 	public String addUser(){
-		if(account.compareTo("Manager") == 0) {
-			user.setAccount("User");
-			try {
-				userBO.addNew(user);
-			} catch (Exception e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
+		user.setAccount("User");
+		try {
+			userBO.addNew(user);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
-		list();
 		return list();
 	}
 
 	public String delete() {
-		if(account.compareTo("Manager") == 0) {
-			try {
-				user = userBO.getById(accountID);
-				userBO.delete(user);
-			} catch (Exception e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
+		try {
+			user = userBO.getById(accountID);
+			userBO.delete(user);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 		list();
 		return "delete";

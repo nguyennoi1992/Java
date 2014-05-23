@@ -76,4 +76,12 @@
 	<definition name="detailsEmployee" extends="baseLayout">
 		<put-attribute name="body" value="/employeeDetails.jsp" />
 	</definition>
+	
+	<definition name="profileCustomer" extends="baseLayout">
+		<put-attribute name="body" value="/profileCustomer.jsp" />
+	</definition>
+	
+	<definition name="profileEmployee" extends="baseLayout">
+		<put-attribute name="body" value="/profileEmployee.jsp" />
+	</definition>
 </tiles-definitions>

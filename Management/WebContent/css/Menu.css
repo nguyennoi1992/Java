@@ -86,7 +86,7 @@ div#menu ul ul li:hover ul,div#menu ul ul ul li:hover ul {
 	left: 100%;
 	padding: 0px;
 	z-index: 90;
-	width: auto;
+	width: 150px;
 }
 
 #menu ul.sub-menu li {

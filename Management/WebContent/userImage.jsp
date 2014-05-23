@@ -6,7 +6,7 @@
 </head>
 
 <body>
-	<h2 align="center">Ảnh người sử dụng</h2>
+	<h2 align="center">Ảnh khách hàng</h2>
 	<s:actionerror />
 <%-- 	<s:property value="customerID" /> --%>
 	<s:form action="uploadCustomer" method="post"

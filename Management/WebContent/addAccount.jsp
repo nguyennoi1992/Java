@@ -12,15 +12,16 @@
 </head>
 <body>
 	<h1 align="center">Thêm tài khoản người dùng</h1>
-	<s:form action="addUserAccount.action" method="post">
+	<s:form action="addUserAccount.action" method="post" accept-charset="utf-8">
 		<s:hidden name="#session.name"></s:hidden>
 		<table width="100%"
 			class="table table-striped table-bordered table-hover">
 			<thead>
 				<tr>
 					<td width="20%">Mã tài khoản:</td>
-					<td width="20%"><s:select headerKey="-1" headerValue="--Lựa chọn--"
-							list="listID" name="user.userNumber" theme="simple"></s:select></td>
+					<td width="20%"><s:select headerKey="-1"
+							headerValue="--Lựa chọn--" list="listID" name="user.userNumber"
+							theme="simple"></s:select></td>
 					<td width="10%"></td>
 					<td width="20%">Email:</td>
 					<td width="20%"><s:textfield name="user.email" theme="simple"></s:textfield>

@@ -11,11 +11,9 @@
 <title>Bảng thông tin tài khoản</title>
 </head>
 <body>
-	<h1 align="center">Bảng thông tin tài khoán</h1>
-	<s:if test="#session.account == 'Manager'">
-		<span style="float: right;"> <a
-			href="<s:url action="addAccount"/>">Thêm tài khoản</a></span>
-	</s:if>
+	<h1 align="center">Bảng thông tin tài khoản</h1>
+	<span style="float: right;"> <a
+		href="<s:url action="addAccount"/>">Thêm tài khoản</a></span>
 	<table width="100%"
 		class="table table-striped table-bordered table-hover">
 		<thead>

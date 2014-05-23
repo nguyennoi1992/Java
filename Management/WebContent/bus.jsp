@@ -12,10 +12,8 @@
 </head>
 <body>
 	<h1 align="center">Các tuyến xe bus</h1>
-	<s:if test="#session.account != 'User'">
-		<span style="float: right;"> <a href="<s:url action="addBus"/>">Thêm
-				tuyến xe bus</a></span>
-	</s:if>
+	<span style="float: right;"> <a href="<s:url action="addBus"/>">Thêm
+			tuyến xe bus</a></span>
 	<s:form action="detailsBus" method="post">
 
 		<table width="100%"
@@ -25,7 +23,7 @@
 					<th width="10%">Tuyến xe bus</th>
 					<th width="60%">Chi tiết</th>
 					<th width="20%">Giá vé</th>
-					<s:if test="#session.account != 'User'">
+					<s:if test="#session.account == 'Manager'">
 						<th width="10%">Xóa</th>
 					</s:if>
 				</tr>
@@ -33,13 +31,19 @@
 			<tbody>
 				<s:iterator value="listBus" var="bus">
 					<tr align="center">
-						<td><a
-							href="detailsBus.action?busID=<s:property
+						<s:if test="#session.account == 'Manager'">
+							<td><a
+								href="detailsBus.action?busID=<s:property
 								value="#bus.busNumber" />"><s:property
-									value="#bus.busNumber" /> </a></td>
+										value="#bus.busNumber" /> </a></td>
+						</s:if>
+						<s:if test="#session.account != 'Manager'">
+							<td><s:property value="#bus.busNumber" /></td>
+						</s:if>
+
 						<td align="left"><s:property value="#bus.details" /></td>
 						<td><s:property value="#bus.cost" /> đ</td>
-						<s:if test="#session.account != 'User'">
+						<s:if test="#session.account == 'Manager'">
 							<td><a
 								href="deleteBus.action?busID=<s:property value="#bus.busNumber" />&pageIndex=<s:property value="pageIndex"/>">
 									Xóa</a></td>

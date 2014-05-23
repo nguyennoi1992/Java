@@ -55,6 +55,7 @@
 			<result name="update" type="tiles">customer</result>
 			<result name="page" type="tiles">customer</result>
 			<result name="active" type="tiles">customer</result>
+			<result name="profile" type="tiles">profileCustomer</result>
 		</action>
 
 		<action name="*Kind" method="{1}" class="com.management.action.KindAction">
@@ -81,7 +82,7 @@
 			<result name="page" type="tiles">payment</result>
 			<result name="delete" type="tiles">payment</result>
 		</action>
-		
+
 		<action name="*Account" method="{1}"
 			class="com.management.action.AccountAction">
 			<result name="list" type="tiles">account</result>
@@ -89,7 +90,7 @@
 			<result name="page" type="tiles">account</result>
 			<result name="delete" type="tiles">account</result>
 		</action>
-		
+
 		<action name="*Employee" method="{1}"
 			class="com.management.action.EmployeeAction">
 			<interceptor-ref name="fileUpload">
@@ -109,6 +110,7 @@
 			<result name="update" type="tiles">employee</result>
 			<result name="page" type="tiles">employee</result>
 			<result name="active" type="tiles">employee</result>
+			<result name="profile" type="tiles">profileEmployee</result>
 		</action>
 
 	</package>

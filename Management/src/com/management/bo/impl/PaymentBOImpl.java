@@ -27,7 +27,8 @@ public class PaymentBOImpl  implements PaymentBO{
 					l.get(i).getDate(),
 					l.get(i).getPlace(),
 					l.get(i).getCustomerNumber(),
-					l.get(i).getUserNumber()));
+					l.get(i).getUserNumber(),
+					l.get(i).getNumberPlate()));
 		}
 		return list;
 	}

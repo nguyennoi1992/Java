@@ -12,10 +12,14 @@
 </head>
 <body>
 	<h1 align="center">Bảng thông tin người dùng</h1>
-	<s:if test="#session.account != 'User'">
-		<span style="float: right;"> <a
-			href="<s:url action="addCustomer"/>">Thêm người dùng</a></span>
-	</s:if>
+	<span style="float: right;"> <a
+		href="<s:url action="addCustomer"/>">Thêm người dùng</a></span>
+	<s:form action="listCustomer" method="post">
+		<s:textfield name="name" theme="simple">Tìm kiếm theo tên: </s:textfield>
+		<span style="float: center;"> <s:submit name="search"
+				value="Tìm kiếm" align="left"></s:submit></span>
+	</s:form>
+
 	<s:form action="detailsCustomer" method="post">
 		<s:hidden name="#session.name"></s:hidden>
 		<table width="100%"
@@ -59,15 +63,10 @@
 						<td><s:property value="#cus.balance" /> đ</td>
 						<td><s:property value="#cus.placeEnroll" /></td>
 						<td><s:property value="#cus.kindNumber" /></td>
-						<s:if test="#session.account != 'User'">
-							<td><a
-								href="activeCustomer.action?customerID=<s:property value="#cus.customerNumber" />&pageIndex=<s:property value="pageIndex"/>">
-									<s:property value="#cus.Actived" />
-							</a></td>
-						</s:if>
-						<s:if test="#session.account == 'User'">
-							<td><s:property value="#cus.Actived" /></td>
-						</s:if>
+						<td><a
+							href="activeCustomer.action?customerID=<s:property value="#cus.customerNumber" />&pageIndex=<s:property value="pageIndex"/>">
+								<s:property value="#cus.Actived" />
+						</a></td>
 					</tr>
 				</s:iterator>
 			</tbody>

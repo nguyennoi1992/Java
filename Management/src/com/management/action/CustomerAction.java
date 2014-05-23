@@ -16,10 +16,12 @@ import org.apache.struts2.interceptor.ServletRequestAware;
 import com.management.bean.Customer;
 import com.management.bean.Kind;
 import com.management.bean.Logging;
+import com.management.bean.Usebus;
 import com.management.bo.impl.BusBOImpl;
 import com.management.bo.impl.CustomerBOImpl;
 import com.management.bo.impl.KindBOImpl;
 import com.management.bo.impl.LoggingBOImpl;
+import com.management.bo.impl.UsebusBOImpl;
 import com.management.utils.ProjectConstants;
 import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
@@ -44,10 +46,13 @@ ServletRequestAware, ProjectConstants {
 	List<Kind> listKind;
 	List<String> listSex = new ArrayList<String>();
 	List<String> listActived = new ArrayList<String>();
-	
-	
+
+
 	Customer customer = new Customer(); 
 	String customerID = null;
+	String busNumber = null;
+	String name = null;
+	String kind;
 
 
 	CustomerBOImpl customerBO = new CustomerBOImpl();
@@ -63,14 +68,17 @@ ServletRequestAware, ProjectConstants {
 	public CustomerAction() {
 		super();
 		// TODO Auto-generated constructor stub
-		System.out.println("Account " + account);
-		if(account.compareTo("User") != 0) {
-			try {
-				totalPage = customerBO.getAll().size() / STATIC_ROW_MAX + 1;
-			} catch (Exception e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+		try {
+			int total = customerBO.getAll().size();
+			int div = total / STATIC_ROW_MAX;
+			if(div * STATIC_ROW_MAX == total) {
+				totalPage = div;
+			} else {
+				totalPage = div + 1;
 			}
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 	}
 
@@ -79,7 +87,7 @@ ServletRequestAware, ProjectConstants {
 	 * @return
 	 */
 	public String list(){
-		if(account.compareTo("User") != 0){
+		if(name == null) {
 			try {
 				list = customerBO.getAll();
 			} catch (Exception e) {
@@ -87,13 +95,28 @@ ServletRequestAware, ProjectConstants {
 				e.printStackTrace();
 			}
 		} else {
-			String userNumber = (String) session.get("userNumber");
+			List<Customer> l = new ArrayList<Customer>();
 			try {
-				list.add(customerBO.getById(userNumber));
+				l = customerBO.getAll();
+				for(Customer cus: l) {
+					String CustomerName = cus.getFirstName() + " " + cus.getLastName();
+					if(CustomerName.compareTo(name) == 0) {
+						list.add(cus);
+					}
+				}
+				int total = list.size();
+				int div = total / STATIC_ROW_MAX;
+				if(div * STATIC_ROW_MAX == total) {
+					totalPage = div;
+				} else {
+					totalPage = div + 1;
+				}	
+
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
+
 		}
 		int index = 0, begin = 0;
 		begin = (pageIndex - 1) * STATIC_ROW_MAX;
@@ -110,38 +133,32 @@ ServletRequestAware, ProjectConstants {
 	}
 
 	public String add(){
-		if(account.compareTo("User") != 0) {
-			try {
-				listKind = kindBO.getAll();
-				listSex.add("Nam");
-				listSex.add("Nữ");
+		try {
+			listKind = kindBO.getAll();
+			listSex.add("Nam");
+			listSex.add("Nữ");
 
-			} catch (Exception e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-
-			listActived.add("Có");
-			listActived.add("Không");
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
+
+		listActived.add("Có");
+		listActived.add("Không");
 
 		return "add";
 	}
 
 	public String create(){
-		if(account.compareTo("User") != 0) {
-			utf8Customer();
-			execute();
-			customer.setImage(userImageFileName);
-			try {
-				customerBO.addNew(customer);
-			} catch (Exception e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
+//		utf8Customer();
+		execute();
+		customer.setImage(userImageFileName);
+		try {
+			customerBO.addNew(customer);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
-		list();
-
 		return list();
 	}
 
@@ -165,14 +182,12 @@ ServletRequestAware, ProjectConstants {
 	}
 
 	public String update(){
-		if(account.compareTo("User") != 0) {
-			utf8Customer();
-			try {
-				customerBO.update(customer);
-			} catch (Exception e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
+		utf8Customer();
+		try {
+			customerBO.update(customer);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 		return list();
 	}
@@ -180,16 +195,14 @@ ServletRequestAware, ProjectConstants {
 		return "image";
 	}
 	public String upload(){
-		if(account.compareTo("User") != 0) {
-			execute();
-			try {
-				customer = customerBO.getById(customerID);
-				customer.setImage(userImageFileName);
-				customerBO.update(customer);
-			} catch (Exception e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
+		execute();
+		try {
+			customer = customerBO.getById(customerID);
+			customer.setImage(userImageFileName);
+			customerBO.update(customer);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 		list();
 
@@ -216,32 +229,33 @@ ServletRequestAware, ProjectConstants {
 	}
 
 	public String active() {
-		if(account.compareTo("User") != 0) {
-			String userNumber = (String) session.get("userNumber");
-			logging.setUserNumber(userNumber);
-			logging.setDate(now());
-			logging.setCustomerNumber(customerID);
-			try {
-				customer = customerBO.getById(customerID);
-				if(customer.getActived().toString().compareTo("Có") == 0) {
-					customer.setActived("Không");
-					logging.setAction("Kích hoạt tài khoản");
-				} else {
-					customer.setActived("Có");
-					logging.setAction("Khóa tài khoản");
-				}
-				customerBO.update(customer);
-				lockBO.addNew(logging);
-			} catch (Exception e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+		String userNumber = (String) session.get("userNumber");
+		logging.setUserNumber(userNumber);
+		logging.setDate(now());
+		logging.setCustomerNumber(customerID);
+		try {
+			customer = customerBO.getById(customerID);
+			if(customer.getActived().toString().compareTo("Có") == 0) {
+				customer.setActived("Không");
+				logging.setAction("Kích hoạt tài khoản");
+			} else {
+				customer.setActived("Có");
+				logging.setAction("Khóa tài khoản");
 			}
+			customerBO.update(customer);
+			lockBO.addNew(logging);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 		list();
 
 		return "active";
 	}
 
+	public String search(){
+		return list();
+	}
 
 	public String page() {
 		if(pageUp != 0) {
@@ -272,7 +286,7 @@ ServletRequestAware, ProjectConstants {
 			myparam = new String(customer.getSex().getBytes("8859_1"),"UTF8");
 			customer.setSex(myparam);;
 			myparam = new String(customer.getSchoolOrCompany().getBytes("8859_1"),"UTF8");
-			customer.setSchoolOrCompany(myparam);;
+			customer.setSchoolOrCompany(myparam);
 			myparam = new String(customer.getJob().getBytes("8859_1"),"UTF8");
 			customer.setJob(myparam);;
 			myparam = new String(customer.getAddress().getBytes("8859_1"),"UTF8");
@@ -288,13 +302,36 @@ ServletRequestAware, ProjectConstants {
 
 	}
 
+	public String profile() {
+		String userNumber = (String) session.get("userNumber");
+		try {
+			customer = customerBO.getById(userNumber);
+			Kind k = kindBO.getById(customer.getKindNumber());
+			if(k.getKind().compareTo("Theo tháng") == 0) {
+				name = k.getKind() + "-" + k.getType() + "-" + k.getCategory();
+				if(k.getType().compareTo("Một tuyến") == 0){
+					UsebusBOImpl useBO = new UsebusBOImpl();
+					Usebus usebus = new Usebus();
+					usebus = useBO.getById(customer.getCustomerNumber());
+					name += "-" + "Tuyến số " + usebus.getBusNumber();
+				}
+			} else {
+				name = k.getKind();
+			}
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return "profile";
+	}
+
 	public String now(){
 		String DATE_FORMAT_NOW = "yyyy-MM-dd HH:mm:ss";
 		Calendar cal = Calendar.getInstance();
 		SimpleDateFormat sdf = new SimpleDateFormat(DATE_FORMAT_NOW);
 		return sdf.format(cal.getTime());
 	}
-	
+
 	public List<Customer> getListCustomer() {
 		return listCustomer;
 	}
@@ -411,5 +448,36 @@ ServletRequestAware, ProjectConstants {
 		this.totalPage = totalPage;
 	}
 
+	public String getBusNumber() {
+		return busNumber;
+	}
+
+	public void setBusNumber(String busNumber) {
+		this.busNumber = busNumber;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		String myparam;
+		try {
+			myparam = new String(name.getBytes("8859_1"),"UTF8");
+			this.name = myparam;
+		} catch (UnsupportedEncodingException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+
+	}
+
+	public String getKind() {
+		return kind;
+	}
+
+	public void setKind(String kind) {
+		this.kind = kind;
+	}
 
 }

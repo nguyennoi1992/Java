@@ -36,7 +36,13 @@ public class BusAction extends ActionSupport implements ProjectConstants{
 		super();
 		// TODO Auto-generated constructor stub
 		try {
-			totalPage = busBO.getAll().size() / STATIC_ROW_MAX + 1;
+			int total = busBO.getAll().size();
+			int div = total / STATIC_ROW_MAX;
+			if(div * STATIC_ROW_MAX == total) {
+				totalPage = div;
+			} else {
+				totalPage = div + 1;
+			}
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -73,14 +79,12 @@ public class BusAction extends ActionSupport implements ProjectConstants{
 	}
 
 	public String create(){
-		if(account.compareTo("User") != 0) {
-			utf8Bus();
-			try {
-				busBO.addNew(bus);
-			} catch (Exception e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
+		utf8Bus();
+		try {
+			busBO.addNew(bus);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 		return list();
 	}
@@ -96,28 +100,24 @@ public class BusAction extends ActionSupport implements ProjectConstants{
 	}
 
 	public String update(){
-		if(account.compareTo("User") != 0) {
-			utf8Bus();
-			try {
-				busBO.update(bus);
-				listBus = busBO.getAll();
-			} catch (Exception e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
+		utf8Bus();
+		try {
+			busBO.update(bus);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
-		return "update";
+		list();
+		return list();
 	}
 
 	public String delete() {
-		if(account.compareTo("User") != 0) {
-			try {
-				bus = busBO.getById(busID);
-				busBO.delete(bus);
-			} catch (Exception e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
+		try {
+			bus = busBO.getById(busID);
+			busBO.delete(bus);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 		list();
 		return "delete";
@@ -211,7 +211,12 @@ public class BusAction extends ActionSupport implements ProjectConstants{
 	}
 
 
+	public List<Bus> getList() {
+		return list;
+	}
 
 
-
+	public void setList(List<Bus> list) {
+		this.list = list;
+	}
 }

@@ -13,7 +13,7 @@
 <body>
 	<h1 align="center">Thêm người dùng mới</h1>
 	<s:form action="createCustomer" method="post" id="viewCustomer"
-		enctype="multipart/form-data" acceptcharset="utf-8">
+		enctype="multipart/form-data" accept-charset="utf-8">
 		<s:hidden name="customerID" value="customer.customerNumber"></s:hidden>
 		<table width="100%" align="center">
 			<thead>

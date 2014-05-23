@@ -21,7 +21,8 @@
 				<th>Địa điểm</th>
 				<th>Khách hàng</th>
 				<th>Nhân viên</th>
-				<s:if test="#session.account != 'User'">
+				<th>Biển số xe</th>
+				<s:if test="#session.account == 'Manager'">
 					<th>Xóa</th>
 				</s:if>
 			</tr>
@@ -34,7 +35,8 @@
 					<td><s:property value="#pay.place" /></td>
 					<td><s:property value="#pay.customerName" /></td>
 					<td><s:property value="#pay.employeeName" /></td>
-					<s:if test="#session.account != 'User'">
+					<td><s:property value="#pay.numberPlate" /></td>
+					<s:if test="#session.account == 'Manager'">
 						<td><a
 							href="deletePayment.action?paymentID=<s:property value="#pay.paymentNumber" />&pageIndex=<s:property value="pageIndex"/>">
 								Xóa</a></td>

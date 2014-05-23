@@ -12,10 +12,8 @@
 </head>
 <body>
 	<h1 align="center">Các loại vé xe bus</h1>
-	<s:if test="#session.account != 'User'">
-		<span style="float: right;"> <a
-			href="<s:url action="addKind"/>">Thêm loại vé</a></span>
-	</s:if>
+	<span style="float: right;"> <a href="<s:url action="addKind"/>">Thêm
+			loại vé</a></span>
 
 	<s:form action="detailsKind" method="post">
 
@@ -42,12 +40,10 @@
 						<td><s:property value="#kin.kind" /></td>
 						<td><s:property value="#kin.type" /></td>
 						<td><s:property value="#kin.category" /></td>
-						<s:if test="#session.account != 'User'">
-							<td><a
-								href="deleteKind.action?kindID=<s:property
+						<td><a
+							href="deleteKind.action?kindID=<s:property
 								value="#kin.kindNumber" />&pageIndex=<s:property value="pageIndex"/>">
-									Xóa</a></td>
-						</s:if>
+								Xóa</a></td>
 					</tr>
 				</s:iterator>
 			</tbody>

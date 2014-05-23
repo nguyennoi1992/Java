@@ -11,7 +11,8 @@
 </head>
 <body>
 	<h1 align="center">Chi tiết</h1>
-	<s:form action="createBus" method="post" id="viewCustomer">
+	<s:form action="updateBus" method="post" id="viewCustomer">
+		<s:hidden name="bus.busNumber"></s:hidden>
 		<table width="100%" align="center"
 			style="border: hidden; background-color: #F3F1EB;">
 			<tr style="border: hidden; background-color: #F3F1EB;">

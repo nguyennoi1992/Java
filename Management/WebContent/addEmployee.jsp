@@ -13,7 +13,7 @@
 <body>
 	<h1 align="center">Thêm người nhân viên mới</h1>
 	<s:form action="addEmployee" method="post"
-		enctype="multipart/form-data" acceptcharset="utf-8">
+		enctype="multipart/form-data" accept-charset="utf-8">
 		<s:hidden name="employeeID" value="employee.employeeNumber"></s:hidden>
 		<table width="100%" align="center">
 			<thead>

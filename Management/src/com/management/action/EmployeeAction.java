@@ -42,6 +42,7 @@ ServletRequestAware, ProjectConstants {
 	EmployeeBOImpl employeeBO = new EmployeeBOImpl();
 
 	String employeeID;
+	String name;
 	int pageUp = 0, pageDown = 0;
 	int pageIndex = 1;
 	int totalPage = 1;
@@ -49,14 +50,17 @@ ServletRequestAware, ProjectConstants {
 	public EmployeeAction() {
 		super();
 		// TODO Auto-generated constructor stub
-		System.out.println("Account " + account);
-		if(account.compareTo("Manager") == 0) {
-			try {
-				totalPage = employeeBO.getAll().size() / STATIC_ROW_MAX + 1;
-			} catch (Exception e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+		try {
+			int total = employeeBO.getAll().size();
+			int div = total / STATIC_ROW_MAX;
+			if(div * STATIC_ROW_MAX == total) {
+				totalPage = div;
+			} else {
+				totalPage = div + 1;
 			}
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 	}
 
@@ -65,13 +69,36 @@ ServletRequestAware, ProjectConstants {
 	 * @return
 	 */
 	public String list(){
-		if(account.compareTo("Manager") == 0){
+		if(name == null) {
 			try {
 				list = employeeBO.getAll();
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
+		} else {
+			List<Employee> l = new ArrayList<Employee>();
+			try {
+				l = employeeBO.getAll();
+				for(Employee cus: l) {
+					String EmployeeName = cus.getFirstName() + " " + cus.getLastName();
+					if(EmployeeName.compareTo(name) == 0) {
+						list.add(cus);
+					}
+				}
+				int total = list.size();
+				int div = total / STATIC_ROW_MAX;
+				if(div * STATIC_ROW_MAX == total) {
+					totalPage = div;
+				} else {
+					totalPage = div + 1;
+				}	
+
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+
 		}
 		int index = 0, begin = 0;
 		begin = (pageIndex - 1) * STATIC_ROW_MAX;
@@ -88,30 +115,23 @@ ServletRequestAware, ProjectConstants {
 	}
 
 	public String add(){
-		if(account.compareTo("Manager") == 0) {
-			listSex.add("Nam");
-			listSex.add("Nữ");
-			listActived.add("Có");
-			listActived.add("Không");
-		}
-
+		listSex.add("Nam");
+		listSex.add("Nữ");
+		listActived.add("Có");
+		listActived.add("Không");
 		return "add";
 	}
 
 	public String create(){
-		if(account.compareTo("Manager") == 0) {
-			utf8Employee();;
-			execute();
-			employee.setImage(userImageFileName);
-			try {
-				employeeBO.addNew(employee);
-			} catch (Exception e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
+		utf8Employee();;
+		execute();
+		employee.setImage(userImageFileName);
+		try {
+			employeeBO.addNew(employee);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
-		list();
-
 		return list();
 	}
 
@@ -132,14 +152,12 @@ ServletRequestAware, ProjectConstants {
 	}
 
 	public String update(){
-		if(account.compareTo("Manager") == 0) {
-			utf8Employee();;
-			try {
-				employeeBO.update(employee);
-			} catch (Exception e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
+		utf8Employee();
+		try {
+			employeeBO.update(employee);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 		return list();
 	}
@@ -150,16 +168,14 @@ ServletRequestAware, ProjectConstants {
 
 
 	public String upload(){
-		if(account.compareTo("Manager") == 0) {
-			execute();
-			try {
-				employee = employeeBO.getById(employeeID);
-				employee.setImage(userImageFileName);
-				employeeBO.update(employee);
-			} catch (Exception e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
+		execute();
+		try {
+			employee = employeeBO.getById(employeeID);
+			employee.setImage(userImageFileName);
+			employeeBO.update(employee);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 		list();
 
@@ -186,25 +202,38 @@ ServletRequestAware, ProjectConstants {
 	}
 
 	public String active() {
-		if(account.compareTo("Manager") == 0) {
-			try {
-				employee = employeeBO.getById(employeeID);
-				if(employee.getActived().toString().compareTo("Có") == 0) {
-					employee.setActived("Không");
-				} else {
-					employee.setActived("Có");
-				}
-				employeeBO.update(employee);
-			} catch (Exception e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+		try {
+			employee = employeeBO.getById(employeeID);
+			if(employee.getActived().toString().compareTo("Có") == 0) {
+				employee.setActived("Không");
+			} else {
+				employee.setActived("Có");
 			}
+			employeeBO.update(employee);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 		list();
 
 		return "active";
 	}
 
+
+	public String profile(){
+		String userNumber = (String) session.get("userNumber");
+		try {
+			employee = employeeBO.getById(userNumber);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return "profile";
+	}
+
+	public String search(){
+		return list();
+	}
 
 	public String page() {
 		if(pageUp != 0) {
@@ -236,10 +265,10 @@ ServletRequestAware, ProjectConstants {
 			employee.setSex(myparam);;
 			myparam = new String(employee.getAddress().getBytes("8859_1"),"UTF8");
 			employee.setAddress(myparam);
+			myparam = new String(employee.getPosition().getBytes("8859_1"),"UTF8");
+			employee.setPosition(myparam);
 			myparam = new String(employee.getActived().getBytes("8859_1"),"UTF8");
 			employee.setActived(myparam);;
-			myparam = new String(employee.getAddress().getBytes("8859_1"),"UTF8");
-			employee.setAddress(myparam);
 		} catch (UnsupportedEncodingException e1) {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
@@ -346,7 +375,23 @@ ServletRequestAware, ProjectConstants {
 	@Override
 	public void setServletRequest(HttpServletRequest arg0) {
 		// TODO Auto-generated method stub
-		
+
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		String myparam;
+		try {
+			myparam = new String(name.getBytes("8859_1"),"UTF8");
+			this.name = myparam;
+		} catch (UnsupportedEncodingException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+
 	}
 
 

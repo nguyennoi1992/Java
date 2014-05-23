@@ -52,7 +52,7 @@
 					<td><s:textfield name="employee.lastName" theme="simple"></s:textfield>
 					</td>
 					<td></td>
-					<td>vị trí:</td>
+					<td>Vị trí:</td>
 					<td><s:textfield name="employee.position" theme="simple"></s:textfield>
 					</td>
 				</tr>
