@@ -4,7 +4,7 @@
 <hibernate-mapping>
 	<class name="com.webservice.bean.User" table="Users">
 		<id name="userNumber" column="UserNumber" type="string">
-			<generator class="native" />
+<!-- 			<generator class="native" /> -->
 		</id>
 
 		<property name="username" column="Username" type="string" />

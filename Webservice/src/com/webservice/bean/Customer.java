@@ -31,7 +31,7 @@ public class Customer implements Serializable {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-
+	
 	public Customer(String customerNumber, String firstName, String lastName,
 			String sex, String dateOfBirth, String image, String dateLimit,
 			String phoneNumber, String address, String schoolOrCompany,
@@ -146,11 +146,12 @@ public class Customer implements Serializable {
 	public void setActived(String actived) {
 		this.actived = actived;
 	}
+
 	public String getSuccess() {
 		return success;
 	}
+
 	public void setSuccess(String success) {
 		this.success = success;
 	}
-
 }

@@ -14,14 +14,13 @@ public class Payment implements Serializable {
 	private String place;
 	private String customerNumber;
 	private String userNumber;
+	private String customerName;
+	private String employeeName;
 	private String numberPlate;
 
 	public Payment() {
 		super();
 		// TODO Auto-generated constructor stub
-	}
-	public int getPaymentNumber() {
-		return paymentNumber;
 	}
 	public Payment(int paymentNumber, String date, String place,
 			String customerNumber, String userNumber, String numberPlate) {
@@ -32,6 +31,11 @@ public class Payment implements Serializable {
 		this.customerNumber = customerNumber;
 		this.userNumber = userNumber;
 		this.numberPlate = numberPlate;
+	}
+
+
+	public int getPaymentNumber() {
+		return paymentNumber;
 	}
 	public void setPaymentNumber(int paymentNumber) {
 		this.paymentNumber = paymentNumber;
@@ -66,16 +70,28 @@ public class Payment implements Serializable {
 	public void setUserNumber(String userNumber) {
 		this.userNumber = userNumber;
 	}
-	public String getSuccess() {
-		return success;
+	public String getCustomerName() {
+		return customerName;
 	}
-	public void setSuccess(String success) {
-		this.success = success;
+	public void setCustomerName(String customerName) {
+		this.customerName = customerName;
+	}
+	public String getEmployeeName() {
+		return employeeName;
+	}
+	public void setEmployeeName(String employeeName) {
+		this.employeeName = employeeName;
 	}
 	public String getNumberPlate() {
 		return numberPlate;
 	}
 	public void setNumberPlate(String numberPlate) {
 		this.numberPlate = numberPlate;
+	}
+	public String getSuccess() {
+		return success;
+	}
+	public void setSuccess(String success) {
+		this.success = success;
 	}
 }

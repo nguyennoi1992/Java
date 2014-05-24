@@ -6,7 +6,7 @@
 <center>
 	<img src="images/background.png" />
 </center>
-<div align="right">
+<s:div align="right" theme="simple">
 	<table border="1"
 		style="border-collapse: collapse; background-color: blue;">
 		<tr align="center">
@@ -15,8 +15,8 @@
 				href="<s:url action="logout"/>">Đăng xuất</a></th>
 		</tr>
 	</table>
-</div>
-<div align="left">
+</s:div>
+<s:div align="left" theme="simple">
 	<table border="1"
 		style="border-collapse: collapse; background-color: blue;">
 		<tr align="center">
@@ -26,4 +26,4 @@
 			</th>
 		</tr>
 	</table>
-</div>
+</s:div>

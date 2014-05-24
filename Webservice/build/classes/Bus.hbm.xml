@@ -8,26 +8,5 @@
 		</id>
 		<property name="details" column="Details" type="string" />
 		<property name="cost" column="Cost" type="float" />
-		
-<!-- 		<set name="busNumber" inverse="true" cascade="all">
-            <key>
-                <column name="BusNumber" not-null="true" />
-            </key>
-            <one-to-many class="com.webservice.bean.Payment" />
-        </set>
-        
-		<set name="busNumber" inverse="true" cascade="all">
-            <key>
-                <column name="BusNumber" not-null="true" />
-            </key>
-            <one-to-many class="com.webservice.bean.User" />
-        </set>
-        
-		<set name="busNumber" inverse="true" cascade="all">
-            <key>
-                <column name="BusNumber" not-null="true" />
-            </key>
-            <one-to-many class="com.webservice.bean.Customer" />
-        </set>	 -->
      </class>
 </hibernate-mapping>

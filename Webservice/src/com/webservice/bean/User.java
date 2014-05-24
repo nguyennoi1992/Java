@@ -19,17 +19,10 @@ public class User implements Serializable{
 	private String email;
 	private String account;
 	
-
-	
 	public User() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-	
-	
-
-
-
 	public User(String userNumber, String username,
 			String password, String email, String account) {
 		super();
@@ -39,11 +32,6 @@ public class User implements Serializable{
 		this.email = email;
 		this.account = account;
 	}
-
-
-
-
-
 	public String getUserNumber() {
 		return userNumber;
 	}
@@ -101,16 +89,10 @@ public class User implements Serializable{
 	public void setEmail(String email) {
 		this.email = email;
 	}
-
-
 	public String getSuccess() {
 		return success;
 	}
-
-
 	public void setSuccess(String success) {
 		this.success = success;
 	}
-	
-
 }

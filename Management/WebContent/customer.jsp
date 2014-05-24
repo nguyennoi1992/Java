@@ -17,7 +17,7 @@
 	<s:form action="listCustomer" method="post">
 		<s:textfield name="name" theme="simple">Tìm kiếm theo tên: </s:textfield>
 		<span style="float: center;"> <s:submit name="search"
-				value="Tìm kiếm" align="left"></s:submit></span>
+				value="Tìm kiếm" align="left" theme="simple" ></s:submit></span>
 	</s:form>
 
 	<s:form action="detailsCustomer" method="post">

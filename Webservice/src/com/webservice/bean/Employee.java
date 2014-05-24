@@ -19,7 +19,6 @@ public class Employee implements Serializable{
 	private String phoneNumber;
 	private String position;
 	private String actived;
-
 	public Employee() {
 		super();
 		// TODO Auto-generated constructor stub
@@ -39,12 +38,6 @@ public class Employee implements Serializable{
 		this.phoneNumber = phoneNumber;
 		this.position = position;
 		this.actived = actived;
-	}
-	public String getSuccess() {
-		return success;
-	}
-	public void setSuccess(String success) {
-		this.success = success;
 	}
 	public String getEmployeeNumber() {
 		return employeeNumber;
@@ -105,5 +98,11 @@ public class Employee implements Serializable{
 	}
 	public void setActived(String actived) {
 		this.actived = actived;
+	}
+	public String getSuccess() {
+		return success;
+	}
+	public void setSuccess(String success) {
+		this.success = success;
 	}
 }
