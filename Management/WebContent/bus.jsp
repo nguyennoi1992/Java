@@ -9,11 +9,14 @@
 <link rel="stylesheet" type="text/css" href="css/bootstrap.css"
 	media="screen"></link>
 <title>Bus</title>
+<s:head/>
 </head>
 <body>
-	<h1 align="center">Các tuyến xe bus</h1>
-	<span style="float: right;"> <a href="<s:url action="addBus"/>">Thêm
-			tuyến xe bus</a></span>
+	<h1 align="center">Các tuyến xe buýt</h1>
+	<s:if test="#session.account=='Manager'">
+		<span style="float: right;"> <a href="<s:url action="addBus"/>">Thêm
+				tuyến xe buýt</a></span>
+	</s:if>
 	<s:form action="detailsBus" method="post">
 
 		<table width="100%"

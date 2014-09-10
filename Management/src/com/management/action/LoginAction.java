@@ -131,9 +131,6 @@ public class LoginAction extends ActionSupport implements ModelDriven<Object>, P
 		Map<String, Object> session = ActionContext.getContext().getSession();
 		session.remove("loggedin");
 		session.remove("message");
-		session.remove("name");
-		session.remove("account");
-		session.remove("userNumber");
 		return SUCCESS;
 	}
 

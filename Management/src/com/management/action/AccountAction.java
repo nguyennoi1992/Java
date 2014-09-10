@@ -4,9 +4,19 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+import com.management.bean.BusDetail;
 import com.management.bean.Customer;
+import com.management.bean.Employee;
+import com.management.bean.Logging;
+import com.management.bean.Payment;
+import com.management.bean.Usebus;
 import com.management.bean.User;
+import com.management.bo.impl.BusDetailBOImpl;
 import com.management.bo.impl.CustomerBOImpl;
+import com.management.bo.impl.EmployeeBOImpl;
+import com.management.bo.impl.LoggingBOImpl;
+import com.management.bo.impl.PaymentBOImpl;
+import com.management.bo.impl.UsebusBOImpl;
 import com.management.bo.impl.UserBOImpl;
 import com.management.utils.ProjectConstants;
 import com.opensymphony.xwork2.ActionContext;
@@ -24,14 +34,23 @@ public class AccountAction extends ActionSupport implements ProjectConstants{
 
 	UserBOImpl userBO = new UserBOImpl();
 	CustomerBOImpl customerBO = new CustomerBOImpl();
+	UsebusBOImpl useBO = new UsebusBOImpl();
+	PaymentBOImpl paymentBO= new PaymentBOImpl();
+	EmployeeBOImpl employeeBO = new EmployeeBOImpl();
+	BusDetailBOImpl busDetailBO = new BusDetailBOImpl();
+	LoggingBOImpl loggingBO = new LoggingBOImpl();
 
 	List<User> listUser = new ArrayList<User>();
 	List<User> list = new ArrayList<User>();
 
-	List<String> listID = new ArrayList<String>();
 
+	List<String> listAccount = new ArrayList<String>();
 	String accountID;
 	User user = new User();
+	Customer customer = new Customer();
+	Usebus use = new Usebus();
+	Payment payment = new Payment();
+	Employee employee = new Employee();
 
 	int pageUp = 0, pageDown = 0;
 	int pageIndex = 1;
@@ -76,31 +95,13 @@ public class AccountAction extends ActionSupport implements ProjectConstants{
 	}
 
 	public String add(){
-		List<Customer> listCustomer = new ArrayList<Customer>();
-		try {
-			listCustomer = customerBO.getAll();
-			list = userBO.getAll();
-			for(Customer cus: listCustomer) {
-				int check = 0;
-				for(User us: list) {
-					if(cus.getCustomerNumber().compareTo(us.getUserNumber()) == 0) {
-						check = 1;
-						break;
-					}
-				}
-				if(check == 0) {
-					listID.add(cus.getCustomerNumber());
-				}
-			}
-		} catch (Exception e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		}
+		listAccount.add(ACCOUNT_USER);
+		listAccount.add(ACCOUNT_EMPLOYEE);
+		listAccount.add(ACCOUNT_SUPERVISOR);
 		return "add";
 	}
 
 	public String addUser(){
-		user.setAccount("User");
 		try {
 			userBO.addNew(user);
 		} catch (Exception e) {
@@ -112,7 +113,52 @@ public class AccountAction extends ActionSupport implements ProjectConstants{
 
 	public String delete() {
 		try {
+			List<Payment> listPayment = paymentBO.getAll();
+			List<Usebus> listUse = useBO.getAll();
+			List<BusDetail> listBusdetail = busDetailBO.getAll();
+			List<Logging> listLog = loggingBO.getAll();
+
 			user = userBO.getById(accountID);
+			if(user.getAccount().compareTo(ACCOUNT_USER) == 0){
+				for(Payment p: listPayment){
+					if(p.getCustomerNumber().compareTo(accountID) == 0){
+						paymentBO.delete(p);
+					}
+				}
+				for(Usebus u: listUse){
+					if(u.getCustomerNumber().compareTo(accountID) == 0){
+						useBO.delete(u);
+					}
+				}
+
+				for(Logging l: listLog){
+					if(l.getCustomerNumber().compareTo(accountID) == 0){
+						loggingBO.delete(l);
+					}
+				}
+
+				customer = customerBO.getById(accountID);
+				customerBO.delete(customer);
+
+			} else if(user.getAccount().compareTo(ACCOUNT_EMPLOYEE) == 0){
+				for(Payment p: listPayment){
+					if(p.getUserNumber().compareTo(accountID) == 0){
+						paymentBO.delete(p);
+					}
+				}
+				for (BusDetail b: listBusdetail) {
+					if(b.getEmployeeNumber().compareTo(accountID) == 0){
+						busDetailBO.delete(b);
+					}
+				}
+				for(Logging l: listLog){
+					if(l.getUserNumber().compareTo(accountID) == 0){
+						loggingBO.delete(l);
+					}
+				}
+				employee = employeeBO.getById(accountID);
+				employeeBO.delete(employee);
+			}
 			userBO.delete(user);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
@@ -196,11 +242,11 @@ public class AccountAction extends ActionSupport implements ProjectConstants{
 		this.listUser = listUser;
 	}
 
-	public List<String> getListID() {
-		return listID;
+	public List<String> getListAccount() {
+		return listAccount;
 	}
 
-	public void setListID(List<String> listID) {
-		this.listID = listID;
+	public void setListAccount(List<String> listAccount) {
+		this.listAccount = listAccount;
 	}
 }

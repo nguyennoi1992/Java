@@ -9,12 +9,14 @@
 <link rel="stylesheet" type="text/css" href="css/bootstrap.css"
 	media="screen"></link>
 <title>Kind</title>
+<s:head/>
 </head>
 <body>
 	<h1 align="center">Các loại vé xe bus</h1>
-	<span style="float: right;"> <a href="<s:url action="addKind"/>">Thêm
-			loại vé</a></span>
-
+	<s:if test="#session.account=='Manager'">
+		<span style="float: right;"> <a
+			href="<s:url action="addKind"/>">Thêm loại vé</a></span>
+	</s:if>
 	<s:form action="detailsKind" method="post">
 
 		<table width="100%"
@@ -25,7 +27,7 @@
 					<th width="30%">Loại</th>
 					<th width="30%">Kiểu</th>
 					<th width="20%">Hạng</th>
-					<s:if test="#session.account != 'User'">
+					<s:if test="#session.account=='Manager'">
 						<th width="10%">Xóa</th>
 					</s:if>
 				</tr>
@@ -33,17 +35,24 @@
 			<tbody>
 				<s:iterator value="listKind" var="kin">
 					<tr align="center">
-						<td><a
-							href="detailsKind.action?kindID=<s:property
+						<s:if test="#session.account=='Manager'">
+							<td><a
+								href="detailsKind.action?kindID=<s:property
 								value="#kin.kindNumber" />"><s:property
-									value="#kin.kindNumber" /> </a></td>
+										value="#kin.kindNumber" /> </a></td>
+						</s:if>
+						<s:if test="#session.account!='Manager'">
+							<td><s:property value="#kin.kindNumber" /></td>
+						</s:if>
 						<td><s:property value="#kin.kind" /></td>
 						<td><s:property value="#kin.type" /></td>
 						<td><s:property value="#kin.category" /></td>
-						<td><a
-							href="deleteKind.action?kindID=<s:property
+						<s:if test="#session.account=='Manager'">
+							<td><a
+								href="deleteKind.action?kindID=<s:property
 								value="#kin.kindNumber" />&pageIndex=<s:property value="pageIndex"/>">
-								Xóa</a></td>
+									Xóa</a></td>
+						</s:if>
 					</tr>
 				</s:iterator>
 			</tbody>

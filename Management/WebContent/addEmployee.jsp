@@ -9,6 +9,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <link rel="stylesheet" type="text/css" href="css/add.css">
 <title>Thêm người nhân viên mới</title>
+<s:head/>
 </head>
 <body>
 	<h1 align="center">Thêm người nhân viên mới</h1>
@@ -19,8 +20,9 @@
 			<thead>
 				<tr>
 					<td width="20%">Mã nhân viên:</td>
-					<td width="20%"><s:textfield name="employee.employeeNumber"
-							theme="simple"></s:textfield></td>
+					<td width="20%"><s:select headerKey="-1"
+							headerValue="--Lựa chọn--" list="listID"
+							name="employee.employeeNumber" theme="simple"></s:select></td>
 					<td width="10%"></td>
 					<td width="20%">Số điện thoại:</td>
 					<td width="20%"><s:textfield name="employee.phoneNumber"

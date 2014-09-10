@@ -8,6 +8,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <link rel="stylesheet" type="text/css" href="css/add.css">
 <title>Thêm loại thẻ mới</title>
+<s:head/>
 </head>
 <body>
 	<h1 align="center">Thêm loại thẻ mới</h1>

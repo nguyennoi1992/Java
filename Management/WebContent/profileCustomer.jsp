@@ -8,9 +8,10 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <link rel="stylesheet" type="text/css" href="css/add.css">
 <title>Thông tin khách hàng</title>
+<s:head/>
 </head>
 <body>
-	<h1 align="center">Chi tiết</h1>
+	<h1 align="center">Thông tin cá nhân</h1>
 	<table width="100%" align="center">
 		<tr>
 			<td width="10%"></td>

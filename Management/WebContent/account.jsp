@@ -9,6 +9,7 @@
 <link rel="stylesheet" type="text/css" href="css/bootstrap.css"
 	media="screen"></link>
 <title>Bảng thông tin tài khoản</title>
+<s:head/>
 </head>
 <body>
 	<h1 align="center">Bảng thông tin tài khoản</h1>

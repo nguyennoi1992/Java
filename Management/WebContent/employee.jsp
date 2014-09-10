@@ -9,17 +9,20 @@
 <link rel="stylesheet" type="text/css" href="css/bootstrap.css"
 	media="screen"></link>
 <title>Bảng thông tin nhân viên</title>
+<s:head/>
 </head>
 <body>
 	<h1 align="center">Bảng thông tin nhân viên</h1>
-	<span style="float: right;"> <a
-		href="<s:url action="addEmployee"/>">Thêm nhân viên</a></span>
-			<s:form action="listEmployee" method="post">
+	<s:if test="#session.account=='Manager'">
+		<span style="float: right;"> <a
+			href="<s:url action="addEmployee"/>">Thêm nhân viên</a></span>
+	</s:if>
+	<s:form action="listEmployee" method="post">
 		<s:textfield name="name" theme="simple">Tìm kiếm theo tên: </s:textfield>
 		<span style="float: center;"> <s:submit name="search"
-				value="Tìm kiếm" align="left" theme="simple" ></s:submit></span>
+				value="Tìm kiếm" align="left" theme="simple"></s:submit></span>
 	</s:form>
-		
+
 	<table width="100%"
 		class="table table-striped table-bordered table-hover">
 		<thead>
@@ -37,13 +40,21 @@
 		<tbody>
 			<s:iterator value="listEmployee" var="em">
 				<tr>
-					<td><a
-						href="detailsEmployee.action?employeeID=<s:property
+					<s:if test="#session.account=='Manager'">
+						<td><a
+							href="detailsEmployee.action?employeeID=<s:property
 								value="#em.employeeNumber" />">
-							<img src="images/employees/<s:property value="#em.image"/>"
+								<img src="images/employees/<s:property value="#em.image"/>"
+								style="height: auto; width: 125px; border-width: 0px;" /> <s:property
+									value="#em.employeeNumber" />
+						</a></td>
+					</s:if>
+					<s:if test="#session.account!='Manager'">
+						<td><img
+							src="images/employees/<s:property value="#em.image"/>"
 							style="height: auto; width: 125px; border-width: 0px;" /> <s:property
-								value="#em.employeeNumber" />
-					</a></td>
+								value="#em.employeeNumber" /></td>
+					</s:if>
 					<td><s:property value="#em.firstName" /> <s:property
 							value="#em.lastName" /></td>
 					<td><s:property value="#em.dateOfBirth" /></td>

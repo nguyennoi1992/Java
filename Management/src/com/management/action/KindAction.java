@@ -5,8 +5,14 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+import com.management.bean.Customer;
 import com.management.bean.Kind;
+import com.management.bean.Logging;
+import com.management.bean.Usebus;
+import com.management.bo.impl.CustomerBOImpl;
 import com.management.bo.impl.KindBOImpl;
+import com.management.bo.impl.LoggingBOImpl;
+import com.management.bo.impl.UsebusBOImpl;
 import com.management.utils.ProjectConstants;
 import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
@@ -22,7 +28,10 @@ public class KindAction extends ActionSupport implements ProjectConstants {
 	Map<String, Object> session = ActionContext.getContext().getSession();
 	String account = (String) session.get("account");
 
-	KindBOImpl kindBO = new KindBOImpl() ;
+	KindBOImpl kindBO = new KindBOImpl();
+	CustomerBOImpl customerBO = new CustomerBOImpl();
+	UsebusBOImpl useBO = new UsebusBOImpl();
+	LoggingBOImpl loggingBO = new LoggingBOImpl();
 
 	Kind kind = new Kind();
 
@@ -73,7 +82,7 @@ public class KindAction extends ActionSupport implements ProjectConstants {
 	}
 
 	public String create(){
-		if(account.compareTo("User") != 0) {
+		if(account.compareTo(ACCOUNT_USER) != 0) {
 			utf8Kind();
 			try {
 				kindBO.addNew(kind);
@@ -106,14 +115,33 @@ public class KindAction extends ActionSupport implements ProjectConstants {
 		return list();
 	}
 	public String delete() {
-		if(account.compareTo("User") != 0) {
-			try {
-				kind = kindBO.getById(kindID);
-				kindBO.delete(kind);
-			} catch (Exception e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+
+		try {
+			List<Customer> listCustomer = customerBO.getAll();
+			List<Usebus> listUse = useBO.getAll();
+			List<Logging> listLog = loggingBO.getAll();
+
+			for(Customer c: listCustomer){
+				if(c.getKindNumber() == kindID){
+					for(Usebus u: listUse){
+						if(u.getCustomerNumber().compareTo(c.getCustomerNumber()) == 0){
+							useBO.delete(u);
+						}
+					}
+					for(Logging l: listLog){
+						if(l.getCustomerNumber().compareTo(c.getCustomerNumber()) == 0){
+							loggingBO.delete(l);
+						}
+					}
+					customerBO.delete(c);
+				}
+
 			}
+			kind = kindBO.getById(kindID);
+			kindBO.delete(kind);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 		list();
 		return "delete";

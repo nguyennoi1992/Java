@@ -9,9 +9,10 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <link rel="stylesheet" type="text/css" href="css/add.css">
 <title>Chi tiết</title>
+<s:head/>
 </head>
 <body>
-	<h1 align="center">Chi tiết</h1>
+	<h1 align="center">Thông tin cá nhân</h1>
 	<table width="100%" align="center">
 		<tr>
 			<td width="10%"></td>
@@ -56,8 +57,10 @@
 			<td>Giới tính:</td>
 			<td><s:property value="employee.sex" /></td>
 			<td></td>
-			<td>Biển số xe:</td>
-			<td><s:property value="name" /></td>
+			<s:if test="#session.position=='Lái xe'">
+				<td>Biển số xe:</td>
+				<td><s:property value="numberPlate" /></td>
+			</s:if>
 		</tr>
 	</table>
 </body>

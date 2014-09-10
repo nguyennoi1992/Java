@@ -9,19 +9,20 @@
 <link rel="stylesheet" type="text/css" href="css/bootstrap.css"
 	media="screen"></link>
 <title>Thêm tài khoản người dùng</title>
+<s:head/>
 </head>
 <body>
 	<h1 align="center">Thêm tài khoản người dùng</h1>
-	<s:form action="addUserAccount.action" method="post" accept-charset="utf-8">
+	<s:form action="addUserAccount.action" method="post"
+		accept-charset="utf-8">
 		<s:hidden name="#session.name"></s:hidden>
 		<table width="100%"
 			class="table table-striped table-bordered table-hover">
 			<thead>
 				<tr>
 					<td width="20%">Mã tài khoản:</td>
-					<td width="20%"><s:select headerKey="-1"
-							headerValue="--Lựa chọn--" list="listID" name="user.userNumber"
-							theme="simple"></s:select></td>
+					<td width="20%"><s:textfield name="user.userNumber"
+							theme="simple"></s:textfield></td>
 					<td width="10%"></td>
 					<td width="20%">Email:</td>
 					<td width="20%"><s:textfield name="user.email" theme="simple"></s:textfield>
@@ -35,6 +36,11 @@
 					<td width="20%">Mật khẩu:</td>
 					<td width="20%"><s:textfield name="user.password"
 							theme="simple"></s:textfield></td>
+				</tr>
+				<tr>
+					<td width="20%">Tài khoản:</td>
+					<td width="20%"><s:select headerKey="-1" headerValue="--Lựa chọn--"
+							list="listAccount" name="user.account" theme="simple"></s:select> </td>
 				</tr>
 			</thead>
 		</table>

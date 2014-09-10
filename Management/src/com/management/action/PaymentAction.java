@@ -41,7 +41,7 @@ public class PaymentAction extends ActionSupport implements ProjectConstants {
 	public PaymentAction() {
 		super();
 		// TODO Auto-generated constructor stub
-		if(account.compareTo("Manager") == 0){
+		if(account.compareTo(ACCOUNT_MANAGER) == 0){
 			try {
 				int total = paymentBO.getAll().size();
 				int div = total / STATIC_ROW_MAX;
@@ -54,7 +54,7 @@ public class PaymentAction extends ActionSupport implements ProjectConstants {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-		} else if(account.compareTo("Employee") == 0){
+		} else if(account.compareTo(ACCOUNT_EMPLOYEE) == 0){
 			List<Payment> l = new ArrayList<Payment>();
 			String userNumber = (String) session.get("userNumber");
 			int total = 0;
@@ -104,14 +104,14 @@ public class PaymentAction extends ActionSupport implements ProjectConstants {
 	 * @return
 	 */
 	public String list(){
-		if(account.compareTo("Manager") == 0){
+		if(account.compareTo(ACCOUNT_MANAGER) == 0){
 			try {
 				list = paymentBO.getAll();
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-		} else if(account.compareTo("Employee") == 0){
+		} else if(account.compareTo(ACCOUNT_EMPLOYEE) == 0){
 			List<Payment> l = new ArrayList<Payment>();
 			String userNumber = (String) session.get("userNumber");
 			try {

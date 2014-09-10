@@ -9,6 +9,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <link rel="stylesheet" type="text/css" href="css/add.css">
 <title>Chi tiết</title>
+<s:head/>
 </head>
 <body>
 	<h1 align="center">Chi tiết</h1>

@@ -5,6 +5,7 @@
 <head>
 <title>Welcome to Service Directory</title>
 <link rel="stylesheet" type="text/css" href="css/stylesheet.css" />
+<s:head/>
 </head>
 
 <body id="login">

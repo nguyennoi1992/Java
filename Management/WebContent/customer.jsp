@@ -9,15 +9,18 @@
 <link rel="stylesheet" type="text/css" href="css/bootstrap.css"
 	media="screen"></link>
 <title>Home</title>
+<s:head/>
 </head>
 <body>
 	<h1 align="center">Bảng thông tin người dùng</h1>
-	<span style="float: right;"> <a
-		href="<s:url action="addCustomer"/>">Thêm người dùng</a></span>
+	<s:if test="#session.account=='Manager'">
+		<span style="float: right;"> <a
+			href="<s:url action="addCustomer"/>">Thêm người dùng</a></span>
+	</s:if>
 	<s:form action="listCustomer" method="post">
 		<s:textfield name="name" theme="simple">Tìm kiếm theo tên: </s:textfield>
 		<span style="float: center;"> <s:submit name="search"
-				value="Tìm kiếm" align="left" theme="simple" ></s:submit></span>
+				value="Tìm kiếm" align="left" theme="simple"></s:submit></span>
 	</s:form>
 
 	<s:form action="detailsCustomer" method="post">
@@ -44,13 +47,22 @@
 			<tbody>
 				<s:iterator value="listCustomer" var="cus">
 					<tr align="center">
-						<td><a
-							href="detailsCustomer.action?customerID=<s:property
+						<s:if test="#session.account=='Manager'">
+							<td><a
+								href="detailsCustomer.action?customerID=<s:property
 								value="#cus.customerNumber" />">
-								<img src="images/customers/<s:property value="#cus.image"/>"
+									<img src="images/customers/<s:property value="#cus.image"/>"
+									style="height: auto; width: 125px; border-width: 0px;" /> <s:property
+										value="#cus.customerNumber" />
+							</a></td>
+						</s:if>
+
+						<s:if test="#session.account!='Manager'">
+							<td><img
+								src="images/customers/<s:property value="#cus.image"/>"
 								style="height: auto; width: 125px; border-width: 0px;" /> <s:property
-									value="#cus.customerNumber" />
-						</a></td>
+									value="#cus.customerNumber" /></td>
+						</s:if>
 						<td><s:property value="#cus.firstName" /> <s:property
 								value="#cus.lastName" /></td>
 						<td><s:property value="#cus.dateOfBirth" /></td>

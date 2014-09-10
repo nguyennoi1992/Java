@@ -3,6 +3,7 @@
 <html>
 <head>
 <title>Upload ảnh</title>
+<s:head/>
 </head>
 
 <body>

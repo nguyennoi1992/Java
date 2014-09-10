@@ -11,8 +11,12 @@ import javax.servlet.http.HttpServletRequest;
 import org.apache.commons.io.FileUtils;
 import org.apache.struts2.interceptor.ServletRequestAware;
 
+import com.management.bean.BusDetail;
 import com.management.bean.Employee;
+import com.management.bean.User;
+import com.management.bo.impl.BusDetailBOImpl;
 import com.management.bo.impl.EmployeeBOImpl;
+import com.management.bo.impl.UserBOImpl;
 import com.management.utils.ProjectConstants;
 import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
@@ -40,9 +44,12 @@ ServletRequestAware, ProjectConstants {
 	List<String> listActived = new ArrayList<String>();
 
 	EmployeeBOImpl employeeBO = new EmployeeBOImpl();
+	UserBOImpl userBO = new UserBOImpl();
 
+	List<String> listID = new ArrayList<String>();
 	String employeeID;
 	String name;
+	String numberPlate;
 	int pageUp = 0, pageDown = 0;
 	int pageIndex = 1;
 	int totalPage = 1;
@@ -50,17 +57,39 @@ ServletRequestAware, ProjectConstants {
 	public EmployeeAction() {
 		super();
 		// TODO Auto-generated constructor stub
-		try {
-			int total = employeeBO.getAll().size();
-			int div = total / STATIC_ROW_MAX;
-			if(div * STATIC_ROW_MAX == total) {
-				totalPage = div;
-			} else {
-				totalPage = div + 1;
+		if(account.compareTo(ACCOUNT_MANAGER) == 0){
+			try {
+				int total = employeeBO.getAll().size();
+				int div = total / STATIC_ROW_MAX;
+				if(div * STATIC_ROW_MAX == total) {
+					totalPage = div;
+				} else {
+					totalPage = div + 1;
+				}
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
 			}
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+		} else {
+			try {
+				List<Employee> l = employeeBO.getAll();
+				for(Employee e: l){
+					if(e.getPosition().compareTo(POSITION_SUPERVISOR) != 0){
+						list.add(e);
+					}
+				}
+				int total = list.size();
+				int div = total / STATIC_ROW_MAX;
+				if(div * STATIC_ROW_MAX == total) {
+					totalPage = div;
+				} else {
+					totalPage = div + 1;
+				}
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+
 		}
 	}
 
@@ -70,11 +99,26 @@ ServletRequestAware, ProjectConstants {
 	 */
 	public String list(){
 		if(name == null) {
-			try {
-				list = employeeBO.getAll();
-			} catch (Exception e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+			if(account.compareTo(ACCOUNT_MANAGER) == 0){
+				try {
+					list = employeeBO.getAll();
+				} catch (Exception e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			} else {
+				try {
+					List<Employee> l = employeeBO.getAll();
+					for(Employee e: l){
+						if(e.getPosition().compareTo(POSITION_SUPERVISOR) != 0){
+							list.add(e);
+						}
+					}
+				} catch (Exception e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+
 			}
 		} else {
 			List<Employee> l = new ArrayList<Employee>();
@@ -115,10 +159,30 @@ ServletRequestAware, ProjectConstants {
 	}
 
 	public String add(){
-		listSex.add("Nam");
-		listSex.add("Nữ");
-		listActived.add("Có");
-		listActived.add("Không");
+		listSex.add(SEX_NAM);
+		listSex.add(SEX_NU);
+		listActived.add(ACTIVED_YES);
+		listActived.add(ACTIVED_NO);
+		List<User> l = new ArrayList<User>();
+		try {
+			l = userBO.getAll();
+			list = employeeBO.getAll();
+			for(User u: l){
+				int check = 0;
+				for(Employee e: list){
+					if(u.getUserNumber().compareTo(e.getEmployeeNumber()) == 0
+							&& u.getAccount().compareTo(ACCOUNT_EMPLOYEE) == 0){
+						check++;
+					}
+				}
+				if(check == 0 && u.getAccount().compareTo(ACCOUNT_EMPLOYEE) == 0){
+					listID.add(u.getUserNumber());
+				}
+			}
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		return "add";
 	}
 
@@ -138,10 +202,10 @@ ServletRequestAware, ProjectConstants {
 
 	public String details(){
 		try {
-			listSex.add("Nam");
-			listSex.add("Nữ");
-			listActived.add("Có");
-			listActived.add("Không");
+			listSex.add(SEX_NAM);
+			listSex.add(SEX_NU);
+			listActived.add(ACTIVED_YES);
+			listActived.add(ACTIVED_NO);
 			employee = employeeBO.getById(employeeID);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
@@ -204,10 +268,10 @@ ServletRequestAware, ProjectConstants {
 	public String active() {
 		try {
 			employee = employeeBO.getById(employeeID);
-			if(employee.getActived().toString().compareTo("Có") == 0) {
-				employee.setActived("Không");
+			if(employee.getActived().toString().compareTo(ACTIVED_YES) == 0) {
+				employee.setActived(ACTIVED_NO);
 			} else {
-				employee.setActived("Có");
+				employee.setActived(ACTIVED_YES);
 			}
 			employeeBO.update(employee);
 		} catch (Exception e) {
@@ -222,8 +286,24 @@ ServletRequestAware, ProjectConstants {
 
 	public String profile(){
 		String userNumber = (String) session.get("userNumber");
+		BusDetailBOImpl busDetailBO = new BusDetailBOImpl();
+		List<BusDetail> l = new ArrayList<BusDetail>(); 
+
 		try {
 			employee = employeeBO.getById(userNumber);
+			System.out.println("position " + employee.getPosition());
+			session.put("position", employee.getPosition());
+			l = busDetailBO.getAll();
+			if(employee.getPosition().compareTo("Lái xe") == 0){
+				for(BusDetail bd: l) {
+					System.out.println("employeeNumber " + bd.getEmployeeNumber());					
+					if(bd.getEmployeeNumber().compareTo(employee.getEmployeeNumber()) == 0){
+						System.out.println("numberPlate1 " + bd.getNumberPlate());
+						numberPlate = bd.getNumberPlate();					
+					}
+				}
+			}
+			System.out.println("numberPlate " + numberPlate);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -394,5 +474,19 @@ ServletRequestAware, ProjectConstants {
 
 	}
 
+	public String getNumberPlate() {
+		return numberPlate;
+	}
 
+	public void setNumberPlate(String numberPlate) {
+		this.numberPlate = numberPlate;
+	}
+
+	public List<String> getListID() {
+		return listID;
+	}
+
+	public void setListID(List<String> listID) {
+		this.listID = listID;
+	}
 }

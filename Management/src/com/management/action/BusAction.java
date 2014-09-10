@@ -6,7 +6,13 @@ import java.util.List;
 import java.util.Map;
 
 import com.management.bean.Bus;
+import com.management.bean.BusDetail;
+import com.management.bean.Payment;
+import com.management.bean.Usebus;
 import com.management.bo.impl.BusBOImpl;
+import com.management.bo.impl.BusDetailBOImpl;
+import com.management.bo.impl.PaymentBOImpl;
+import com.management.bo.impl.UsebusBOImpl;
 import com.management.utils.ProjectConstants;
 import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
@@ -23,7 +29,10 @@ public class BusAction extends ActionSupport implements ProjectConstants{
 	String account = (String) session.get("account");
 
 
-	BusBOImpl busBO = new BusBOImpl() ;
+	BusBOImpl busBO = new BusBOImpl();
+	UsebusBOImpl useBO = new UsebusBOImpl();
+	BusDetailBOImpl busDetailBO = new BusDetailBOImpl();
+	PaymentBOImpl paymentBO = new PaymentBOImpl();
 
 	Bus bus = new Bus();
 
@@ -113,6 +122,26 @@ public class BusAction extends ActionSupport implements ProjectConstants{
 
 	public String delete() {
 		try {
+			List<Usebus> listUse = useBO.getAll();
+			List<BusDetail> listBusdetail = busDetailBO.getAll();
+			List<Payment> listPayment = paymentBO.getAll();
+			
+			for(Usebus u: listUse){
+				if(u.getBusNumber().compareTo(busID) == 0){
+					useBO.delete(u);
+				}
+				
+			}
+			for(BusDetail b: listBusdetail){
+				if(b.getBusNumber().compareTo(busID) == 0){
+					for(Payment p: listPayment){
+						if(p.getNumberPlate().compareTo(b.getNumberPlate()) == 0){
+							paymentBO.delete(p);
+						}
+					}
+					busDetailBO.delete(b);
+				}
+			}
 			bus = busBO.getById(busID);
 			busBO.delete(bus);
 		} catch (Exception e) {

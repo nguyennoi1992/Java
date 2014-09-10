@@ -9,6 +9,7 @@
 <link rel="stylesheet" type="text/css" href="css/bootstrap.css"
 	media="screen"></link>
 <title>Payment</title>
+<s:head/>
 </head>
 <body>
 	<h1 align="center">Lịch sử giao dịch</h1>

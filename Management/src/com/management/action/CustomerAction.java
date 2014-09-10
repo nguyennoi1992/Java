@@ -13,15 +13,18 @@ import javax.servlet.http.HttpServletRequest;
 import org.apache.commons.io.FileUtils;
 import org.apache.struts2.interceptor.ServletRequestAware;
 
+import com.management.bean.Bus;
 import com.management.bean.Customer;
 import com.management.bean.Kind;
 import com.management.bean.Logging;
 import com.management.bean.Usebus;
+import com.management.bean.User;
 import com.management.bo.impl.BusBOImpl;
 import com.management.bo.impl.CustomerBOImpl;
 import com.management.bo.impl.KindBOImpl;
 import com.management.bo.impl.LoggingBOImpl;
 import com.management.bo.impl.UsebusBOImpl;
+import com.management.bo.impl.UserBOImpl;
 import com.management.utils.ProjectConstants;
 import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
@@ -46,6 +49,7 @@ ServletRequestAware, ProjectConstants {
 	List<Kind> listKind;
 	List<String> listSex = new ArrayList<String>();
 	List<String> listActived = new ArrayList<String>();
+	List<Bus> listBus= new ArrayList<Bus>();
 
 
 	Customer customer = new Customer(); 
@@ -59,8 +63,11 @@ ServletRequestAware, ProjectConstants {
 	KindBOImpl kindBO = new KindBOImpl();
 	BusBOImpl busBO = new BusBOImpl();
 	LoggingBOImpl lockBO = new LoggingBOImpl();
+	UserBOImpl userBO = new UserBOImpl();
+
 	Logging logging = new Logging();
 
+	List<String> listID = new ArrayList<String>();
 	int pageUp = 0, pageDown = 0;
 	int pageIndex = 1;
 	int totalPage = 1;
@@ -133,24 +140,40 @@ ServletRequestAware, ProjectConstants {
 	}
 
 	public String add(){
+		List<User> l = new ArrayList<User>();
 		try {
 			listKind = kindBO.getAll();
-			listSex.add("Nam");
-			listSex.add("Nữ");
+			listSex.add(SEX_NAM);
+			listSex.add(SEX_NU);
+			l = userBO.getAll();
+			list = customerBO.getAll();
+			listBus = busBO.getAll();
+			for(User u: l) {
+				int check = 0;
+				for(Customer c: list){
+					if(u.getUserNumber().compareTo(c.getCustomerNumber()) == 0
+							&& u.getAccount().compareTo(ACCOUNT_USER) == 0){
+						check++;
+					}
+				}
+				if(check == 0 && u.getAccount().compareTo(ACCOUNT_USER) == 0){
+					listID.add(u.getUserNumber());
+				}
+			}
 
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 
-		listActived.add("Có");
-		listActived.add("Không");
+		listActived.add(ACTIVED_YES);
+		listActived.add(ACTIVED_NO);
 
 		return "add";
 	}
 
 	public String create(){
-//		utf8Customer();
+		//		utf8Customer();
 		execute();
 		customer.setImage(userImageFileName);
 		try {
@@ -166,11 +189,11 @@ ServletRequestAware, ProjectConstants {
 	public String details(){
 		try {
 			listKind = kindBO.getAll();
-			listSex.add("Nam");
-			listSex.add("Nữ");
+			listSex.add(SEX_NAM);
+			listSex.add(SEX_NU);
 
-			listActived.add("Có");
-			listActived.add("Không");
+			listActived.add(ACTIVED_YES);
+			listActived.add(ACTIVED_NO);
 
 			customer = customerBO.getById(customerID);
 		} catch (Exception e) {
@@ -235,12 +258,12 @@ ServletRequestAware, ProjectConstants {
 		logging.setCustomerNumber(customerID);
 		try {
 			customer = customerBO.getById(customerID);
-			if(customer.getActived().toString().compareTo("Có") == 0) {
-				customer.setActived("Không");
-				logging.setAction("Kích hoạt tài khoản");
+			if(customer.getActived().toString().compareTo(ACTIVED_YES) == 0) {
+				customer.setActived(ACTIVED_NO);
+				logging.setAction(ACTION_LOCK);
 			} else {
-				customer.setActived("Có");
-				logging.setAction("Khóa tài khoản");
+				customer.setActived(ACTIVED_YES);
+				logging.setAction(ACTION_UNLOCK);
 			}
 			customerBO.update(customer);
 			lockBO.addNew(logging);
@@ -478,6 +501,14 @@ ServletRequestAware, ProjectConstants {
 
 	public void setKind(String kind) {
 		this.kind = kind;
+	}
+
+	public List<String> getListID() {
+		return listID;
+	}
+
+	public void setListID(List<String> listID) {
+		this.listID = listID;
 	}
 
 }

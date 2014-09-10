@@ -22,4 +22,22 @@ public abstract interface ProjectConstants {
 		"A", "B", "C", "D", "E", "F", "G", "H", 
 		"I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", 
 		"Y", "Z"};
+	
+	public final String ACCOUNT_USER = "User";
+	public final String ACCOUNT_EMPLOYEE = "Employee";
+	public final String ACCOUNT_SUPERVISOR = "Supervisor";
+	public final String ACCOUNT_MANAGER = "Manager";
+	
+	
+	public final String SEX_NAM = "Nam";
+	public final String SEX_NU = "Nữ";
+	
+	public final String ACTIVED_YES = "Có";
+	public final String ACTIVED_NO = "Không";
+	
+	public final String ACTION_LOCK = "Khóa tài khoản";
+	public final String ACTION_UNLOCK = "Kích hoạt tài khoản";
+	
+	public final String POSITION_SUPERVISOR = "Kiểm soát viên";
+	public final String POSITION_DRIVER = "Lái xe";
 }
